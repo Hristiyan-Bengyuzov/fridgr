@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import "../../assets/styles/Navbar.css";
+import NavToggler from "./NavToggler";
 
 export default function Navbar() {
-  const [expanded, setExpanded] = useState(false);
-  const [navColour, setNavColour] = useState(false);
+  const [expanded, setExpanded] = useState<boolean>(false);
+  const [navColour, setNavColour] = useState<boolean>(false);
 
   const scrollHandler = () => {
     setNavColour(window.scrollY >= 20);
@@ -27,19 +28,7 @@ export default function Navbar() {
     >
       <div className="container">
         <img src={logo} className="img-fluid logo" alt="brand" />
-        <button
-          className={`navbar-toggler ${!expanded ? "collapsed" : ""}`}
-          type="button"
-          aria-controls="responsive-navbar-nav"
-          aria-label="Toggle navigation"
-          onClick={() => {
-            setExpanded(!expanded);
-          }}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        <NavToggler expanded={expanded} setExpanded={setExpanded} />
         <div
           className={`collapse navbar-collapse ${expanded ? "show" : ""}`}
           id="navbarResponsive"
