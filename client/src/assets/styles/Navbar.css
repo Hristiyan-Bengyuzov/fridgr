@@ -33,6 +33,7 @@
 .navbar-toggler:focus,
 .navbar-toggler:active {
   outline: 0 !important;
+  box-shadow: none !important;
 }
 
 .navbar-toggler span:nth-child(1),
