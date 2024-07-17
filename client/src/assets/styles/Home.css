@@ -1,0 +1,103 @@
+.bg-hero {
+  background: linear-gradient(rgba(15, 23, 43, 0.9), rgba(15, 23, 43, 0.9)),
+    url("../images/bg-hero.jpg");
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-container {
+  padding: 2rem;
+  width: 80%;
+  height: 75%;
+  display: flex;
+}
+
+.text-container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.browse-title {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  width: 40%;
+  line-height: 1.2;
+}
+
+.food-description {
+  width: 55%;
+  color: white;
+  font-size: 1rem;
+}
+
+.browse-btn {
+  width: 15rem;
+  height: 5rem;
+  background-color: #2ec68d;
+}
+
+.hero-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes imgRotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.hero-img {
+  width: 35rem;
+  height: 35rem;
+  animation: imgRotate 50s linear infinite;
+}
+
+@media (max-width: 1245px) {
+  .home-container {
+    flex-direction: column;
+  }
+
+  .text-container {
+    align-items: center;
+    gap: 0;
+  }
+
+  .food-description,
+  .browse-title {
+    width: auto;
+    text-align: center;
+  }
+
+  .browse-btn {
+    width: 10rem;
+    height: 5rem;
+    background-color: #2ec68d;
+  }
+
+  .hero-img {
+    width: 20rem;
+    height: 20rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-img {
+    width: 15rem;
+    height: 15rem;
+  }
+}
+
+/* no image for you >:( */
+@media (max-width: 615px) {
+  .hero-img {
+    display: none;
+  }
+}

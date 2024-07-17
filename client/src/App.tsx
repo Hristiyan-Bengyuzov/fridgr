@@ -5,8 +5,9 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import './App.css';
+import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
+import Home from "./components/Home/Home";
 
 function App() {
   const [load, upadateLoad] = useState(true);
@@ -24,7 +25,7 @@ function App() {
       <div className="App" id={load ? "no-scroll" : "scroll"}>
         <Navbar />
         <Routes>
-          <Route path="/" />
+          <Route path="/" element={<Home />} />
           <Route path="/about" />
           <Route path="/recipes" />
           <Route path="/login" />
