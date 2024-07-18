@@ -8,6 +8,7 @@ import {
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [load, upadateLoad] = useState(true);
@@ -31,6 +32,7 @@ function App() {
           <Route path="/login" />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );
