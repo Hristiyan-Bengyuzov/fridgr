@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webapi", "webapi\webapi.csproj", "{EEBC7D24-C7E0-4571-AAD6-6E6A70A64011}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fridgr.Data.Models", "Fridgr.Data.Models\Fridgr.Data.Models.csproj", "{4D06A283-53B8-4732-9ADD-45F7604E6F62}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fridgr.Data", "Fridgr.Data\Fridgr.Data.csproj", "{0C63D80B-37AE-452E-968D-6D11CFDAF385}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fridgr.Services.Data", "Fridgr.Services.Data\Fridgr.Services.Data.csproj", "{34914A12-02C6-4F75-85F8-35E5CEAB3C14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fridgr.Web.DTOs", "Fridgr.Web.DTOs\Fridgr.Web.DTOs.csproj", "{F9A8FC5F-06C9-479E-8256-CA1E627E08C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fridgr.Services.Mapping", "Fridgr.Services.Mapping\Fridgr.Services.Mapping.csproj", "{A80EDFE6-9C74-437C-AFE2-2992C72ECB64}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEBC7D24-C7E0-4571-AAD6-6E6A70A64011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEBC7D24-C7E0-4571-AAD6-6E6A70A64011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEBC7D24-C7E0-4571-AAD6-6E6A70A64011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEBC7D24-C7E0-4571-AAD6-6E6A70A64011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D06A283-53B8-4732-9ADD-45F7604E6F62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D06A283-53B8-4732-9ADD-45F7604E6F62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D06A283-53B8-4732-9ADD-45F7604E6F62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D06A283-53B8-4732-9ADD-45F7604E6F62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C63D80B-37AE-452E-968D-6D11CFDAF385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C63D80B-37AE-452E-968D-6D11CFDAF385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C63D80B-37AE-452E-968D-6D11CFDAF385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C63D80B-37AE-452E-968D-6D11CFDAF385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34914A12-02C6-4F75-85F8-35E5CEAB3C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34914A12-02C6-4F75-85F8-35E5CEAB3C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34914A12-02C6-4F75-85F8-35E5CEAB3C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34914A12-02C6-4F75-85F8-35E5CEAB3C14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9A8FC5F-06C9-479E-8256-CA1E627E08C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9A8FC5F-06C9-479E-8256-CA1E627E08C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9A8FC5F-06C9-479E-8256-CA1E627E08C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9A8FC5F-06C9-479E-8256-CA1E627E08C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A80EDFE6-9C74-437C-AFE2-2992C72ECB64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A80EDFE6-9C74-437C-AFE2-2992C72ECB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A80EDFE6-9C74-437C-AFE2-2992C72ECB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A80EDFE6-9C74-437C-AFE2-2992C72ECB64}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B910379-48BC-4D65-B608-D9A0EBD4266D}
+	EndGlobalSection
+EndGlobal
