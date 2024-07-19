@@ -1,4 +1,5 @@
 using Fridgr.Data;
+using Fridgr.Services.Data.Images;
 using Fridgr.Services.Data.Tokens;
 using Fridgr.Services.Mapping;
 using Fridgr.Web.DTOs.Register;
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<FridgrDbContext>(options => options.UseSqlServer(b
 
 // add services
 builder.Services.AddSingleton<ITokenService, TokenService>();
+builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
