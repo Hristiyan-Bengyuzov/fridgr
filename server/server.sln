@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fridgr.Data.Models", "Fridg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fridgr.Data", "Fridgr.Data\Fridgr.Data.csproj", "{0C63D80B-37AE-452E-968D-6D11CFDAF385}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fridgr.Services.Data", "Fridgr.Services.Data\Fridgr.Services.Data.csproj", "{34914A12-02C6-4F75-85F8-35E5CEAB3C14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fridgr.Services.Data", "Fridgr.Services.Data\Fridgr.Services.Data.csproj", "{34914A12-02C6-4F75-85F8-35E5CEAB3C14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fridgr.Web.DTOs", "Fridgr.Web.DTOs\Fridgr.Web.DTOs.csproj", "{F9A8FC5F-06C9-479E-8256-CA1E627E08C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fridgr.Web.DTOs", "Fridgr.Web.DTOs\Fridgr.Web.DTOs.csproj", "{F9A8FC5F-06C9-479E-8256-CA1E627E08C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fridgr.Services.Mapping", "Fridgr.Services.Mapping\Fridgr.Services.Mapping.csproj", "{A80EDFE6-9C74-437C-AFE2-2992C72ECB64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fridgr.Services.Mapping", "Fridgr.Services.Mapping\Fridgr.Services.Mapping.csproj", "{A80EDFE6-9C74-437C-AFE2-2992C72ECB64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fridgr.Common", "Fridgr.Common\Fridgr.Common.csproj", "{45069A13-6759-4DB6-A3E6-9D3F28519C91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A80EDFE6-9C74-437C-AFE2-2992C72ECB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A80EDFE6-9C74-437C-AFE2-2992C72ECB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A80EDFE6-9C74-437C-AFE2-2992C72ECB64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45069A13-6759-4DB6-A3E6-9D3F28519C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45069A13-6759-4DB6-A3E6-9D3F28519C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45069A13-6759-4DB6-A3E6-9D3F28519C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45069A13-6759-4DB6-A3E6-9D3F28519C91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -27,8 +27,4 @@
     <ProjectReference Include="..\Fridgr.Web.DTOs\Fridgr.Web.DTOs.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

@@ -1,9 +1,11 @@
 using Fridgr.Data;
+using Fridgr.Data.Models;
 using Fridgr.Services.Data.Images;
 using Fridgr.Services.Data.Tokens;
 using Fridgr.Services.Mapping;
 using Fridgr.Web.DTOs.Register;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -13,6 +15,10 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<FridgrDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<FridgrDbContext>()
+    .AddDefaultTokenProviders();
 
 // add services
 builder.Services.AddSingleton<ITokenService, TokenService>();
