@@ -20,6 +20,7 @@ export default function Register() {
   };
 
   return (
+    <div className="register-bg">
     <Form
       className="register-form"
       onFinish={handleRegisterSubmit}
@@ -109,5 +110,6 @@ export default function Register() {
         </Form.Item>
       </div>
     </Form>
+    </div>
   );
 }

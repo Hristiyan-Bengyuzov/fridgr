@@ -1,8 +1,13 @@
-.register-form {
-  margin: 0 auto;
-  max-width: 700px;
+.register-bg {
   min-height: 100vh;
-  background-color: #282c34;
+  background: linear-gradient(rgba(15, 23, 43, 0.9), rgba(15, 23, 43, 0.9)),
+    url("../images/tableCloth.jpg");
+  background-size: cover;
+  display: grid;
+  place-items: center;
+}
+
+.register-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,11 +19,11 @@
 }
 
 .register-btn-container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .register-title {
-    color: white;
-    margin-bottom: 2rem;
+  color: white;
+  margin-bottom: 2rem;
 }
