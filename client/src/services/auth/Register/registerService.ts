@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 
 export default async function handleRegisterSubmit(
   values: RegisterFormValues
-): Promise<{ success?: string; error?: string }> {
+): Promise<{ success?: string; error?: string } | undefined> {
   const formData = new FormData();
 
   formData.append("username", values.username);
@@ -23,10 +23,13 @@ export default async function handleRegisterSubmit(
         },
       }
     );
-    
+
     return { success: response.data as string };
   } catch (e) {
     const error = e as AxiosError;
-    return { error: error.response?.data as string };
+
+    if (error.response?.status === 409) {
+      return { error: error.response?.data as string };
+    }
   }
 }

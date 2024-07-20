@@ -12,8 +12,8 @@ export default function fireSwal(
     text: text,
     icon: icon,
     color: "white",
-    background: "#424242",
-    confirmButtonColor: "#ff9800",
+    background: "#181a27",
+    confirmButtonColor: "#00b96b",
   }).then((res) => {
     if (route && (res.isConfirmed || res.isDismissed)) {
       navigate(route);
