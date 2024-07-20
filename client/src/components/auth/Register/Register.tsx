@@ -1,36 +1,12 @@
 import { useState } from "react";
-import axios from "axios";
 import { Form, Input, Button, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { UploadFile } from "antd/es/upload/interface";
-import RegisterFormValues from "../../../types/auth/Register/RegisterFormValues";
+import handleRegisterSubmit from "../../../services/auth/Register/registerService";
 import "../../../assets/styles/Register.css";
 
 export default function Register() {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
-
-  const onFinish = async (values: RegisterFormValues) => {
-    const formData = new FormData();
-
-    formData.append("username", values.username);
-    formData.append("email", values.email);
-    formData.append("password", values.password);
-    if (values.image && values.image[0]) {
-      formData.append("image", values.image[0].originFileObj as any);
-    }
-
-    try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/Authentication/register`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      console.log("Response:", response.data);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
 
   const handleChange = ({ fileList }: { fileList: UploadFile[] }) => {
     setFileList(fileList);
@@ -46,7 +22,7 @@ export default function Register() {
   return (
     <Form
       className="register-form"
-      onFinish={onFinish}
+      onFinish={handleRegisterSubmit}
       scrollToFirstError
       initialValues={{ image: fileList }}
     >
