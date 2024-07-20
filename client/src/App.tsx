@@ -9,6 +9,8 @@ import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import Footer from "./components/Footer/Footer";
+import Register from "./components/auth/Register/Register";
+import { ConfigProvider } from "antd";
 
 function App() {
   const [load, upadateLoad] = useState(true);
@@ -22,19 +24,29 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="App" id={load ? "no-scroll" : "scroll"}>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" />
-          <Route path="/recipes" />
-          <Route path="/login" />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#00b96b",
+          borderRadius: 2,
+        },
+      }}
+    >
+      <Router>
+        <div className="App" id={load ? "no-scroll" : "scroll"}>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" />
+            <Route path="/recipes" />
+            <Route path="/login" />
+            <Route path="/register" element={<Register />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+    </ConfigProvider>
   );
 }
 
