@@ -1,7 +1,9 @@
 import RegisterFormValues from "../../../types/auth/Register/RegisterFormValues";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
-export default async function handleRegisterSubmit(values: RegisterFormValues) {
+export default async function handleRegisterSubmit(
+  values: RegisterFormValues
+): Promise<{ success?: string; error?: string }> {
   const formData = new FormData();
 
   formData.append("username", values.username);
@@ -21,9 +23,10 @@ export default async function handleRegisterSubmit(values: RegisterFormValues) {
         },
       }
     );
-
-    console.log("Response:", response.data);
-  } catch (error) {
-    console.error("Error:", error);
+    
+    return { success: response.data as string };
+  } catch (e) {
+    const error = e as AxiosError;
+    return { error: error.response?.data as string };
   }
 }

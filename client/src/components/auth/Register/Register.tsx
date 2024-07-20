@@ -4,8 +4,12 @@ import { UploadOutlined } from "@ant-design/icons";
 import { UploadFile } from "antd/es/upload/interface";
 import handleRegisterSubmit from "../../../services/auth/Register/registerService";
 import "../../../assets/styles/Register.css";
+import fireSwal from "../../../utils/swalUtil";
+import RegisterFormValues from "../../../types/auth/Register/RegisterFormValues";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const handleChange = ({ fileList }: { fileList: UploadFile[] }) => {
@@ -19,11 +23,21 @@ export default function Register() {
     return e?.fileList;
   };
 
+  const onFinish = async (values: RegisterFormValues) => {
+    const result = await handleRegisterSubmit(values);
+
+    if (result.success) {
+      fireSwal(result.success, 'You can now log into your account!', 'success', navigate, '/login')
+    } else if (result.error){
+      fireSwal('Error!', result.error, 'error', navigate);
+    }
+  };
+
   return (
     <div className="register-bg">
     <Form
       className="register-form"
-      onFinish={handleRegisterSubmit}
+      onFinish={onFinish}
       scrollToFirstError
       initialValues={{ image: fileList }}
     >
