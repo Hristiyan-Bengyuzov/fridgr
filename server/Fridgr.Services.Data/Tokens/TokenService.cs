@@ -18,7 +18,6 @@ namespace Fridgr.Services.Data.Tokens
             var authClaims = new List<Claim>
             {
                 new Claim("username", username),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
