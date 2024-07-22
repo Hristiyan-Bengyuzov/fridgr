@@ -7,5 +7,8 @@ namespace Fridgr.Data
     public class FridgrDbContext : IdentityDbContext<ApplicationUser>
     {
         public FridgrDbContext(DbContextOptions<FridgrDbContext> options) : base(options) { }
+
+        public DbSet<FoodCategory> FoodCategories { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
     }
 }
