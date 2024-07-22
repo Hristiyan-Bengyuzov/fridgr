@@ -1,5 +1,6 @@
 using Fridgr.Data;
 using Fridgr.Data.Models;
+using Fridgr.Data.Seeders;
 using Fridgr.Services.Data.Images;
 using Fridgr.Services.Data.Tokens;
 using Fridgr.Services.Mapping;
@@ -85,6 +86,12 @@ builder.Services.AddAuthentication(options =>
 });
 
 var app = builder.Build();
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var dbContext = serviceScope.ServiceProvider.GetRequiredService<FridgrDbContext>();
+    await new FridgrSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider);
+}
 
 // custom mappings will happen only in DTO project
 AutoMapperConfig.RegisterMappings(typeof(RegisterDTO).Assembly);
