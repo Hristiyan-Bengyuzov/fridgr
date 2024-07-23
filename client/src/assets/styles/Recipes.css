@@ -1,0 +1,37 @@
+.recipes-bg {
+  min-height: 100vh;
+  margin-top: 100px;
+  display: flex;
+  align-items: start;
+}
+
+.ingredients-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-left: 3rem;
+}
+
+.ingredient-panel {
+  max-width: 250px;
+  overflow: hidden;
+  height: auto;
+}
+
+.ingredient-tag {
+  margin: 4px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 50px;
+}
+
+.ingredient-tag-selected {
+  background-color: #1890ff;
+  color: white;
+}
+
+.ant-collapse-header {
+  color: white !important;
+}

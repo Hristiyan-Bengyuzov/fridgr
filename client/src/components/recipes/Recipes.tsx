@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { IngredientsByCategory } from "../../types/ingredients/ingredientDTOs";
 import { fetchIngredientsByCategories } from "../../services/ingredients/ingredientService";
 import IngredientsCatalog from "../Ingredients/IngredientsCatalog";
+import '../../assets/styles/Recipes.css';
 
 export default function Recipes() {
   const [ingredientsByCategories, setIngredientsByCategories] = useState<
@@ -34,7 +35,7 @@ export default function Recipes() {
   };
 
   return (
-    <div className="register-bg">
+    <div className="recipes-bg">
       {loading ? (
         <p>Loading...</p>
       ) : (
