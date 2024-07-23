@@ -11,6 +11,7 @@ import Home from "./components/Home/Home";
 import Footer from "./components/Footer/Footer";
 import Register from "./components/auth/Register/Register";
 import Login from "./components/auth/Login/Login";
+import Recipes from "./components/recipes/Recipes";
 import { ConfigProvider } from "antd";
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" />
-            <Route path="/recipes" />
+            <Route path="/recipes" element={<Recipes/>}/>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="*" element={<Navigate to="/" />} />
