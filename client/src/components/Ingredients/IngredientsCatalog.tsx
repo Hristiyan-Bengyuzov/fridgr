@@ -5,12 +5,32 @@ const { Panel } = Collapse;
 
 export default function IngredientsCatalog({
   ingredientsByCategory,
-}: IngredientCategoryProps) {
+  onIngredientSelect,
+  selectedIngredients,
+}: IngredientCategoryProps & {
+  onIngredientSelect: (id: number) => void;
+  selectedIngredients: number[];
+}) {
   return (
     <Collapse>
-      <Panel header={ingredientsByCategory.categoryName} key="1">
+      <Panel
+        header={ingredientsByCategory.categoryName}
+        key={ingredientsByCategory.categoryName}
+      >
         {ingredientsByCategory.ingredients.map((ingredient) => (
-          <Tag key={ingredient.id} style={{ margin: "4px" }}>
+          <Tag
+            key={ingredient.id}
+            style={{
+              margin: "4px",
+              backgroundColor: selectedIngredients.includes(ingredient.id)
+                ? "#1890ff"
+                : "",
+              color: selectedIngredients.includes(ingredient.id) ? "white" : "",
+              cursor: "pointer",
+              userSelect: "none",
+            }}
+            onClick={() => onIngredientSelect(ingredient.id)}
+          >
             {ingredient.name}
           </Tag>
         ))}

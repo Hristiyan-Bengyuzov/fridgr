@@ -7,6 +7,7 @@ export default function Recipes() {
   const [ingredientsByCategories, setIngredientsByCategories] = useState<
     IngredientsByCategory[]
   >([]);
+  const [selectedIngredients, setSelectedIngredients] = useState<number[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -24,6 +25,14 @@ export default function Recipes() {
     fetchData();
   }, []);
 
+  const handleIngredientSelect = (id: number) => {
+    setSelectedIngredients((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((selectedId) => selectedId !== id)
+        : [...prevSelected, id]
+    );
+  };
+
   return (
     <div className="register-bg">
       {loading ? (
@@ -31,7 +40,12 @@ export default function Recipes() {
       ) : (
         <div className="ingredients-container">
           {ingredientsByCategories.map((x) => (
-            <IngredientsCatalog ingredientsByCategory={x} key={x.categoryName} />
+            <IngredientsCatalog
+              ingredientsByCategory={x}
+              key={x.categoryName}
+              onIngredientSelect={handleIngredientSelect}
+              selectedIngredients={selectedIngredients}
+            />
           ))}
         </div>
       )}
