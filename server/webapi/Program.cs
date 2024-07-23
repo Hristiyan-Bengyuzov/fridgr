@@ -3,6 +3,7 @@ using Fridgr.Data.Models;
 using Fridgr.Data.Repositories;
 using Fridgr.Data.Seeders;
 using Fridgr.Services.Data.Images;
+using Fridgr.Services.Data.Ingredients;
 using Fridgr.Services.Data.Tokens;
 using Fridgr.Services.Mapping;
 using Fridgr.Web.DTOs.Register;
@@ -28,6 +29,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 // add services
 builder.Services.AddSingleton<ITokenService, TokenService>();
 builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
+builder.Services.AddTransient<IIngredientService, IngredientService>();
 
 builder.Services.AddCors(options =>
 {
