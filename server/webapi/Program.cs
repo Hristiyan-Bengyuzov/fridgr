@@ -1,5 +1,6 @@
 using Fridgr.Data;
 using Fridgr.Data.Models;
+using Fridgr.Data.Repositories;
 using Fridgr.Data.Seeders;
 using Fridgr.Services.Data.Images;
 using Fridgr.Services.Data.Tokens;
@@ -20,6 +21,9 @@ builder.Services.AddDbContext<FridgrDbContext>(options => options.UseSqlServer(b
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<FridgrDbContext>()
     .AddDefaultTokenProviders();
+
+// add repository
+builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
 // add services
 builder.Services.AddSingleton<ITokenService, TokenService>();
