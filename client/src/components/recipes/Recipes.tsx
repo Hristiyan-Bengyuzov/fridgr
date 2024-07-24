@@ -2,13 +2,18 @@ import { useState, useEffect } from "react";
 import { IngredientsByCategory } from "../../types/ingredients/ingredientDTOs";
 import { fetchIngredientsByCategories } from "../../services/ingredients/ingredientService";
 import IngredientsCatalog from "../Ingredients/IngredientsCatalog";
-import '../../assets/styles/Recipes.css';
+import { Button } from "antd";
+import "../../assets/styles/Recipes.css";
+import { getRecipesByIngredients } from "../../services/recipes/recipeService";
+import RecipeCard from "./RecipeCard";
+import { RecipeDTO } from "../../types/recipes/recipeDTOs";
 
 export default function Recipes() {
   const [ingredientsByCategories, setIngredientsByCategories] = useState<
     IngredientsByCategory[]
   >([]);
   const [selectedIngredients, setSelectedIngredients] = useState<number[]>([]);
+  const [recipes, setRecipes] = useState<RecipeDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -34,21 +39,39 @@ export default function Recipes() {
     );
   };
 
+  const fetchRecipes = async (ingredients: number[]) => {
+    const result = await getRecipesByIngredients(ingredients);
+    setRecipes(result);
+  };
+
   return (
     <div className="recipes-bg">
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="ingredients-container">
-          {ingredientsByCategories.map((x) => (
-            <IngredientsCatalog
-              ingredientsByCategory={x}
-              key={x.categoryName}
-              onIngredientSelect={handleIngredientSelect}
-              selectedIngredients={selectedIngredients}
-            />
-          ))}
-        </div>
+        <>
+          <div className="ingredients-container">
+            {ingredientsByCategories.map((x) => (
+              <IngredientsCatalog
+                ingredientsByCategory={x}
+                key={x.categoryName}
+                onIngredientSelect={handleIngredientSelect}
+                selectedIngredients={selectedIngredients}
+              />
+            ))}
+            <Button
+              className="recipes-btn"
+              onClick={() => fetchRecipes(selectedIngredients)}
+            >
+              Search recipes
+            </Button>
+          </div>
+          <div className="recipes-container">
+            {recipes.map((recipe) => (
+              <RecipeCard key={recipe.id} recipe={recipe} />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

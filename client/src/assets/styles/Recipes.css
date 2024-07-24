@@ -35,3 +35,14 @@
 .ant-collapse-header {
   color: white !important;
 }
+
+.recipes-btn {
+  background-color: #00b96b;
+}
+
+.recipes-container {
+  margin-left: 2rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
