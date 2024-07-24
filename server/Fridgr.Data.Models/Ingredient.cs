@@ -16,5 +16,7 @@ namespace Fridgr.Data.Models
 
         [Required]
         public FoodCategory Category { get; set; } = null!;
+
+        public ICollection<RecipeIngredient> Recipes { get; set; } = new HashSet<RecipeIngredient>();
     }
 }
