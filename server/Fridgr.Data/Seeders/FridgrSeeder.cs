@@ -12,6 +12,9 @@
             {
                 new FoodCategorySeeder(),
                 new IngredientSeeder(),
+                new RecipeSeeder(),
+                new InstructionSeeder(),
+                new RecipeIngredientSeeder()
             };
 
             foreach (var seeder in seeders)

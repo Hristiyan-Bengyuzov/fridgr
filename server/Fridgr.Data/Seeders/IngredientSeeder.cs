@@ -27,6 +27,7 @@ namespace Fridgr.Data.Seeders
 
                 // Vegetables
                 new Ingredient { Name = "Tomato", CategoryId = 2 },
+                new Ingredient { Name = "Cucumber", CategoryId = 2 },
                 new Ingredient { Name = "Onion", CategoryId = 2 },
                 new Ingredient { Name = "Carrot", CategoryId = 2 },
                 new Ingredient { Name = "Potato", CategoryId = 2 },
