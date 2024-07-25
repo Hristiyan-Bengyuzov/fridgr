@@ -21,5 +21,19 @@ namespace webapi.Controllers
             var recipes = await _recipeService.GetRecipesByIngredientsAsync(ingredients);
             return Ok(recipes);
         }
+
+        [HttpPost("createRecipe")]
+        public async Task<IActionResult> CreateRecipe([FromForm] CreateRecipeDTO createRecipeDTO)
+        {
+            try
+            {
+                await _recipeService.CreateRecipeAsync(createRecipeDTO);
+                return Ok("Recipe successfully created.");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }
