@@ -13,6 +13,7 @@ import Register from "./components/auth/Register/Register";
 import Login from "./components/auth/Login/Login";
 import Recipes from "./components/recipes/Recipes";
 import { ConfigProvider } from "antd";
+import CreateRecipe from "./components/recipes/CreateRecipe";
 
 function App() {
   const [load, upadateLoad] = useState(true);
@@ -40,7 +41,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" />
-            <Route path="/recipes" element={<Recipes/>}/>
+            <Route path="/recipes" element={<Recipes />} />
+            <Route path="/createRecipe" element={<CreateRecipe />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="*" element={<Navigate to="/" />} />

@@ -12,6 +12,7 @@
   gap: 2rem;
   justify-content: center;
   margin-left: 3rem;
+  z-index: 100;
 }
 
 .ingredient-panel {
@@ -45,4 +46,28 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.create-recipe-hero {
+  min-height: 100vh;
+  background: linear-gradient(rgba(15, 23, 43, 0.9), rgba(15, 23, 43, 0.9)),
+    url("../images/create-recipe-bg.jpg");
+  background-size: cover;
+  display: grid;
+  place-items: center;
+}
+
+.create-recipe-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  height: inherit;
+}
+
+.create-recipe-form {
+  margin-left: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
