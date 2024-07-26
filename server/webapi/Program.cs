@@ -4,8 +4,10 @@ using Fridgr.Data.Repositories;
 using Fridgr.Data.Seeders;
 using Fridgr.Services.Data.Images;
 using Fridgr.Services.Data.Ingredients;
+using Fridgr.Services.Data.RecipeLikes;
 using Fridgr.Services.Data.Recipes;
 using Fridgr.Services.Data.Tokens;
+using Fridgr.Services.Data.Users;
 using Fridgr.Services.Mapping;
 using Fridgr.Web.DTOs.Register;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -32,6 +34,8 @@ builder.Services.AddSingleton<ITokenService, TokenService>();
 builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
 builder.Services.AddTransient<IIngredientService, IngredientService>();
 builder.Services.AddTransient<IRecipeService, RecipeService>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IRecipeLikeService, RecipeLikeService>();
 
 builder.Services.AddCors(options =>
 {

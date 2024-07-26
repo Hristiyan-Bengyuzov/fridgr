@@ -1,0 +1,30 @@
+﻿using Fridgr.Services.Data.RecipeLikes;
+using Fridgr.Web.DTOs.LikeRecipes;
+using Microsoft.AspNetCore.Mvc;
+
+namespace webapi.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class RecipeLikesController : ControllerBase
+    {
+        private readonly IRecipeLikeService _recipeLikeService;
+
+        public RecipeLikesController(IRecipeLikeService recipeLikeService)
+        {
+            _recipeLikeService = recipeLikeService;
+        }
+
+        [HttpPost("likeRecipe")]
+        public async Task<IActionResult> LikeRecipe(LikeRecipeRequest likeRecipeRequest)
+        {
+            if (await _recipeLikeService.UserLikedRecipeAsync(likeRecipeRequest.RecipeId, likeRecipeRequest.Username))
+            {
+                return BadRequest("You've already liked this recipe.");
+            }
+
+            await _recipeLikeService.LikeRecipeAsync(likeRecipeRequest.RecipeId, likeRecipeRequest.Username);
+            return Ok("Recipe liked.");
+        }
+    }
+}

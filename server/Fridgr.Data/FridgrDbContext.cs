@@ -13,5 +13,6 @@ namespace Fridgr.Data
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Instruction> Instructions { get; set; }
         public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
+        public DbSet<RecipeLike> RecipeLikes { get; set; }
     }
 }
