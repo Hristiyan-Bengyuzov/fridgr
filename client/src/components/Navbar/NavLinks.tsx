@@ -3,6 +3,13 @@ import NavTogglerProps from "../../types/Navbar/NavbarProps";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Avatar } from "antd";
+import {
+  HomeOutlined,
+  UserAddOutlined,
+  LoginOutlined,
+  LogoutOutlined,
+  CoffeeOutlined,
+} from "@ant-design/icons";
 
 export default function NavLinks({ expanded, setExpanded }: NavTogglerProps) {
   const authContext = useContext(AuthContext);
@@ -14,9 +21,18 @@ export default function NavLinks({ expanded, setExpanded }: NavTogglerProps) {
     >
       <ul className="navbar-nav ms-auto links">
         <li className="nav-item">
-          <Link to="/" className="nav-link" onClick={() => setExpanded(false)}>
-            Home
-          </Link>
+          <div className="link-container">
+            <Link
+              to="/"
+              className="nav-link"
+              onClick={() => setExpanded(false)}
+            >
+              <div className="d-flex">
+                <HomeOutlined style={{ marginRight: "12px" }} />
+                Home
+              </div>
+            </Link>
+          </div>
         </li>
         <li className="nav-item">
           <Link
@@ -24,34 +40,36 @@ export default function NavLinks({ expanded, setExpanded }: NavTogglerProps) {
             className="nav-link"
             onClick={() => setExpanded(false)}
           >
-            Recipes
+            <div className="d-flex">
+              <CoffeeOutlined style={{ marginRight: "12px" }} />
+              Recipes
+            </div>
           </Link>
         </li>
         {authContext?.user ? (
           <>
             <li className="nav-item">
               <Link
-                to="/profile"
+                to="/"
                 className="nav-link"
-                onClick={() => setExpanded(false)}
+                onClick={() => {
+                  authContext.logout();
+                  setExpanded(false);
+                }}
               >
-                <div style={{ display: "flex" }}>
-                  Profile
-                  <Avatar
-                    src={authContext.user.image}
-                    size={36}
-                    style={{ marginLeft: "8px" }}
-                  />
+                <div className="d-flex">
+                  <LogoutOutlined style={{ marginRight: "12px" }} />
+                  Logout
                 </div>
               </Link>
             </li>
             <li className="nav-item">
               <Link
-                to="/logout"
+                to="/profile"
                 className="nav-link"
                 onClick={() => setExpanded(false)}
               >
-                Logout
+                <Avatar src={authContext.user.image} size={36} />
               </Link>
             </li>
           </>
@@ -63,7 +81,10 @@ export default function NavLinks({ expanded, setExpanded }: NavTogglerProps) {
                 className="nav-link"
                 onClick={() => setExpanded(false)}
               >
-                Register
+                <div className="d-flex">
+                  <UserAddOutlined style={{ marginRight: "12px" }} />
+                  Register
+                </div>
               </Link>
             </li>
             <li className="nav-item">
@@ -72,7 +93,10 @@ export default function NavLinks({ expanded, setExpanded }: NavTogglerProps) {
                 className="nav-link"
                 onClick={() => setExpanded(false)}
               >
-                Login
+                <div className="d-flex">
+                  <LoginOutlined style={{ marginRight: "12px" }} />
+                  Login
+                </div>
               </Link>
             </li>
           </>
