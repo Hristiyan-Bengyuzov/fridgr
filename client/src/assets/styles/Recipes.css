@@ -71,3 +71,23 @@
   justify-content: center;
   flex-direction: column;
 }
+
+.recipe-details-container {
+  margin-top: 100px;
+  min-height: 100vh;
+}
+
+.recipe-details-card {
+  display: flex;
+}
+
+@media (max-width: 1400px) {
+  .recipe-details-card {
+    flex-direction: column;
+  }  
+
+  .recipe-details-img {
+    height: 50vh;
+    object-fit: contain;
+  }
+}

@@ -11,3 +11,11 @@ export interface CreateRecipeFormValues {
   instructions: string[];
   image?: UploadFile[];
 }
+
+export interface RecipeDetailsDTO {
+  id: number;
+  name: string;
+  image: string;
+  ingredients: string[];
+  instructions: string[];
+}
