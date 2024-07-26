@@ -20,7 +20,8 @@ namespace webapi.Controllers
         {
             if (await _recipeLikeService.UserLikedRecipeAsync(likeRecipeRequest.RecipeId, likeRecipeRequest.Username))
             {
-                return BadRequest("You've already liked this recipe.");
+                await _recipeLikeService.DislikeRecipeAsync(likeRecipeRequest.RecipeId, likeRecipeRequest.Username);
+                return Ok("Recipe disliked.");
             }
 
             await _recipeLikeService.LikeRecipeAsync(likeRecipeRequest.RecipeId, likeRecipeRequest.Username);

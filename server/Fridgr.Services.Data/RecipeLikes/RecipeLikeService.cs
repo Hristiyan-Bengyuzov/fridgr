@@ -1,6 +1,7 @@
 ﻿using Fridgr.Data.Models;
 using Fridgr.Data.Repositories;
 using Fridgr.Services.Data.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fridgr.Services.Data.RecipeLikes
 {
@@ -13,6 +14,14 @@ namespace Fridgr.Services.Data.RecipeLikes
         {
             _recipeLikeRepository = recipeLikeRepository;
             _userService = userService;
+        }
+
+        public async Task DislikeRecipeAsync(int recipeId, string username)
+        {
+            string userId = await _userService.GetUserIdByUsernameAsync(username);
+            var recipeLike = await _recipeLikeRepository.All().FirstAsync(rl => rl.RecipeId == recipeId && rl.UserId == userId);
+            _recipeLikeRepository.Delete(recipeLike);
+            await _recipeLikeRepository.SaveChangesAsync();
         }
 
         public async Task LikeRecipeAsync(int recipeId, string username)
