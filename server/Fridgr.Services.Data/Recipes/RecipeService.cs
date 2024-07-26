@@ -51,6 +51,26 @@ namespace Fridgr.Services.Data.Recipes
             await _recipeRepository.SaveChangesAsync();
         }
 
+        public async Task<RecipeDetailsDTO?> GetRecipeDetailsAsync(int id)
+        {
+            var recipe = await _recipeRepository.AllAsNoTracking()
+                .Include(r => r.Instructions)
+                .Include(r => r.Ingredients)
+                .ThenInclude(ri => ri.Ingredient)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (recipe is null) return null;
+
+            return new RecipeDetailsDTO
+            {
+                Id = recipe.Id,
+                Name = recipe.Name,
+                Image = recipe.Image,
+                Ingredients = recipe.Ingredients.Select(ri => ri.Ingredient.Name),
+                Instructions = recipe.Instructions.Select(i => i.Text)
+            };
+        }
+
         public async Task<IEnumerable<RecipeDTO>> GetRecipesByIngredientsAsync(IEnumerable<int> ingredients)
         {
             var recipes = await _recipeRepository.AllAsNoTracking()

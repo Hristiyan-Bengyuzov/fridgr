@@ -35,5 +35,12 @@ namespace webapi.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpGet("getRecipeDetails/{id}")]
+        public async Task<ActionResult<RecipeDetailsDTO>> GetRecipeDetails(int id)
+        {
+            var recipeDetails = await _recipeService.GetRecipeDetailsAsync(id);
+            return recipeDetails is null ? NoContent() : Ok(recipeDetails);
+        }
     }
 }

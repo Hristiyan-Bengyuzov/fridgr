@@ -6,5 +6,6 @@ namespace Fridgr.Services.Data.Recipes
     {
         Task<IEnumerable<RecipeDTO>> GetRecipesByIngredientsAsync(IEnumerable<int> ingredients);
         Task CreateRecipeAsync(CreateRecipeDTO createRecipeDTO);
+        Task<RecipeDetailsDTO?> GetRecipeDetailsAsync(int id);
     }
 }
