@@ -2,13 +2,14 @@ import { createContext, useState, useEffect, ReactNode } from "react";
 import { jwtDecode } from "jwt-decode";
 
 interface AuthTokens {
-    jwtToken:     string;
-    expiration:   Date;
-    refreshToken: string;
+  jwtToken: string;
+  expiration: Date;
+  refreshToken: string;
 }
 
 interface User {
   username: string;
+  image: string;
 }
 
 interface AuthContextType {
@@ -22,7 +23,9 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined
+);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
@@ -43,7 +46,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.setItem("authTokens", JSON.stringify(tokens));
     const decoded = jwtDecode<User>(tokens.jwtToken);
     setUser(decoded);
-    console.log(user?.username)
   };
 
   const logout = () => {

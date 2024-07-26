@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Fridgr.Services.Data.Users;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -10,14 +11,20 @@ namespace Fridgr.Services.Data.Tokens
     public class TokenService : ITokenService
     {
         private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
 
-        public TokenService(IConfiguration configuration) => _configuration = configuration;
+        public TokenService(IConfiguration configuration, IUserService userService)
+        {
+            _configuration = configuration;
+            _userService = userService;
+        }
 
         public JwtSecurityToken GenerateJwt(string username)
         {
             var authClaims = new List<Claim>
             {
                 new Claim("username", username),
+                new Claim("image", _userService.GetUserImageByUsernameAsync(username).GetAwaiter().GetResult())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(

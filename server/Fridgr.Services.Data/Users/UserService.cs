@@ -18,5 +18,11 @@ namespace Fridgr.Services.Data.Users
             var user = await _userRepository.AllAsNoTracking().FirstAsync(u => u.UserName == username);
             return user.Id;
         }
+
+        public async Task<string> GetUserImageByUsernameAsync(string username)
+        {
+            var user = await _userRepository.AllAsNoTracking().FirstAsync(u => u.UserName == username);
+            return user.ImageUrl!;
+        }
     }
 }

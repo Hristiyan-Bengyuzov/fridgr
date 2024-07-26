@@ -3,5 +3,6 @@
     public interface IUserService
     {
         Task<string> GetUserIdByUsernameAsync(string username);
+        Task<string> GetUserImageByUsernameAsync(string username);
     }
 }
