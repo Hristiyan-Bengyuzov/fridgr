@@ -15,6 +15,7 @@ import Recipes from "./components/recipes/Recipes";
 import { ConfigProvider } from "antd";
 import CreateRecipe from "./components/recipes/CreateRecipe";
 import RecipeDetails from "./components/recipes/RecipeDetails";
+import EditRecipe from "./components/recipes/EditRecipe";
 
 function App() {
   const [load, upadateLoad] = useState(true);
@@ -45,6 +46,7 @@ function App() {
             <Route path="/recipes" element={<Recipes />} />
             <Route path="/recipe/:recipeId" element={<RecipeDetails />} />
             <Route path="/createRecipe" element={<CreateRecipe />} />
+            <Route path="/editRecipe/:recipeId" element={<EditRecipe />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="*" element={<Navigate to="/" />} />

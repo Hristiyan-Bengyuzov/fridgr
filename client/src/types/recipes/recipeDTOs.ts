@@ -19,3 +19,12 @@ export interface RecipeDetailsDTO {
   ingredients: string[];
   instructions: string[];
 }
+
+export interface EditRecipeDTO {
+  id: number;
+  name: string;
+  image: string;
+  imageInput: UploadFile[];
+  ingredientIds: number[];
+  instructions: string[];
+}
