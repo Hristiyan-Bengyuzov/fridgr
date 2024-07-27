@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import NavTogglerProps from "../../types/Navbar/NavbarProps";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { Avatar } from "antd";
+import { Avatar, Popover } from "antd";
 import {
   HomeOutlined,
   UserAddOutlined,
@@ -64,13 +64,19 @@ export default function NavLinks({ expanded, setExpanded }: NavTogglerProps) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                to="/profile"
-                className="nav-link"
-                onClick={() => setExpanded(false)}
+              <Popover
+                content={authContext.user.username}
+                trigger="hover"
+                placement="bottom"
               >
-                <Avatar src={authContext.user.image} size={36} />
-              </Link>
+                <Link
+                  to="/profile"
+                  className="nav-link"
+                  onClick={() => setExpanded(false)}
+                >
+                  <Avatar src={authContext.user.image} size={36} />
+                </Link>
+              </Popover>
             </li>
           </>
         ) : (
