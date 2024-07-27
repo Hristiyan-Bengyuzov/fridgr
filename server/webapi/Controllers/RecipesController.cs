@@ -42,5 +42,33 @@ namespace webapi.Controllers
             var recipeDetails = await _recipeService.GetRecipeDetailsAsync(id);
             return recipeDetails is null ? NoContent() : Ok(recipeDetails);
         }
+
+        [HttpGet("getRecipeEditDTO/{id}")]
+        public async Task<ActionResult<RecipeDetailsDTO>> GetRecipeEditDTO(int id)
+        {
+            try
+            {
+                var recipeEditDTO = await _recipeService.GetEditRecipeDTO(id);
+                return Ok(recipeEditDTO);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPost("editRecipe")]
+        public async Task<IActionResult> EditRecipe([FromForm] EditRecipeDTO editRecipeDTO)
+        {
+            try
+            {
+                await _recipeService.EditRecipeAsync(editRecipeDTO);
+                return Ok("Edited recipe.");
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }

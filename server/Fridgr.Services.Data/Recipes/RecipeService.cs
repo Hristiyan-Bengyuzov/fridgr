@@ -51,6 +51,63 @@ namespace Fridgr.Services.Data.Recipes
             await _recipeRepository.SaveChangesAsync();
         }
 
+        public async Task EditRecipeAsync(EditRecipeDTO editRecipeDTO)
+        {
+            var recipe = await _recipeRepository.All()
+               .Include(r => r.Instructions)
+               .Include(r => r.Ingredients)
+               .ThenInclude(ri => ri.Ingredient)
+               .FirstAsync(r => r.Id == editRecipeDTO.Id);
+
+            recipe.Name = editRecipeDTO.Name;
+
+            if (editRecipeDTO.ImageInput is not null)
+            {
+                recipe.Image = _cloudinaryService.UploadImage(editRecipeDTO.ImageInput);
+            }
+
+            recipe.Instructions.Clear();
+            foreach (var instruction in editRecipeDTO.Instructions)
+            {
+                recipe.Instructions.Add(new Instruction
+                {
+                    RecipeId = recipe.Id,
+                    Text = instruction,
+                });
+            }
+
+            recipe.Ingredients.Clear();
+            foreach (var ingredientId in editRecipeDTO.IngredientIds)
+            {
+                recipe.Ingredients.Add(new RecipeIngredient
+                {
+                    RecipeId = recipe.Id,
+                    IngredientId = ingredientId,
+                });
+            }
+
+            _recipeRepository.Update(recipe);
+            await _recipeRepository.SaveChangesAsync();
+        }
+
+        public async Task<EditRecipeDTO> GetEditRecipeDTO(int id)
+        {
+            var recipe = await _recipeRepository.AllAsNoTracking()
+                .Include(r => r.Instructions)
+                .Include(r => r.Ingredients)
+                .ThenInclude(ri => ri.Ingredient)
+                .FirstAsync(r => r.Id == id);
+
+            return new EditRecipeDTO
+            {
+                Id = recipe.Id,
+                Name = recipe.Name,
+                Image = recipe.Image!,
+                IngredientIds = recipe.Ingredients.Select(ri => ri.Ingredient.Id),
+                Instructions = recipe.Instructions.Select(i => i.Text)
+            };
+        }
+
         public async Task<RecipeDetailsDTO?> GetRecipeDetailsAsync(int id)
         {
             var recipe = await _recipeRepository.AllAsNoTracking()
