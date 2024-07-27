@@ -70,5 +70,20 @@ namespace webapi.Controllers
                 return StatusCode(500);
             }
         }
+
+        [HttpDelete("deleteRecipe/{id}")]
+        public async Task<IActionResult> DeleteRecipe(int id)
+        {
+            try
+            {
+                await _recipeService.DeleteRecipeAsync(id);
+                return Ok("Deleted recipe.");
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
     }
 }

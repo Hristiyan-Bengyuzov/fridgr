@@ -51,6 +51,14 @@ namespace Fridgr.Services.Data.Recipes
             await _recipeRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteRecipeAsync(int id)
+        {
+            var recipe = await _recipeRepository.All().FirstAsync(r => r.Id == id);
+
+            _recipeRepository.Delete(recipe);
+            await _recipeRepository.SaveChangesAsync();
+        }
+
         public async Task EditRecipeAsync(EditRecipeDTO editRecipeDTO)
         {
             var recipe = await _recipeRepository.All()

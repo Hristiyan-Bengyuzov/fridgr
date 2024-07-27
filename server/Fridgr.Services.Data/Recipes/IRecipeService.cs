@@ -9,5 +9,6 @@ namespace Fridgr.Services.Data.Recipes
         Task<RecipeDetailsDTO?> GetRecipeDetailsAsync(int id);
         Task<EditRecipeDTO> GetEditRecipeDTO(int id);
         Task EditRecipeAsync(EditRecipeDTO editRecipeDTO);
+        Task DeleteRecipeAsync(int id);
     }
 }
