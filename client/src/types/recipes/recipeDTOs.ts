@@ -16,6 +16,7 @@ export interface RecipeDetailsDTO {
   id: number;
   name: string;
   image: string;
+  owner?: string | null;
   ingredients: string[];
   instructions: string[];
 }

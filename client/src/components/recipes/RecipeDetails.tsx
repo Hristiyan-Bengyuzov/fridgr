@@ -1,13 +1,17 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Card, List, Typography, Button } from "antd";
-import { HeartOutlined, HeartFilled } from "@ant-design/icons";
+import {
+  HeartOutlined,
+  HeartFilled,
+  EditOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 import { RecipeDetailsDTO } from "../../types/recipes/recipeDTOs";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 import { likeRecipe } from "../../services/recipeLikes/recipeLikesService";
-import '../../assets/styles/Heart.css';
+import "../../assets/styles/Heart.css";
 
 const { Title } = Typography;
 
@@ -37,6 +41,14 @@ export default function RecipeDetails() {
     await likeRecipe({ recipeId: recipeId, username: username });
   };
 
+  const handleEdit = () => {
+
+  };
+
+  const handleDelete = () => {
+
+  };
+
   return (
     <div className="recipe-details-container">
       <Card
@@ -46,7 +58,7 @@ export default function RecipeDetails() {
           <img
             alt={recipeDetails.name}
             src={recipeDetails.image}
-            className="img-fluid recipe-details-img"
+            className="img fluid recipe-details-img"
           />
         }
       >
@@ -71,19 +83,57 @@ export default function RecipeDetails() {
           )}
           bordered
         />
-        <Button
-          type="primary"
-          icon={liked ? <HeartFilled className="heart-icon liked" /> : <HeartOutlined className="heart-icon" />}
-          onClick={() =>
-            toggleLike(
-              parseInt(recipeId as string),
-              authContext?.user?.username as string
+        <div className="button-container" style={{ marginTop: "16px" }}>
+          {authContext?.user ? (
+            recipeDetails.owner === authContext?.user?.username ? (
+              <>
+                <Button
+                  className="recipe-details-btn"
+                  icon={<EditOutlined />}
+                  onClick={handleEdit}
+                  style={{ backgroundColor: "yellow", borderColor: "yellow" }}
+                >
+                  Edit Recipe
+                </Button>
+                <Button
+                  className="recipe-details-btn"
+                  icon={<DeleteOutlined />}
+                  onClick={handleDelete}
+                  style={{
+                    backgroundColor: "red",
+                    borderColor: "red",
+                    marginLeft: "8px",
+                  }}
+                >
+                  Delete Recipe
+                </Button>
+              </>
+            ) : (
+              <Button
+                type="primary"
+                icon={
+                  liked ? (
+                    <HeartFilled className="heart-icon liked" />
+                  ) : (
+                    <HeartOutlined className="heart-icon" />
+                  )
+                }
+                onClick={() =>
+                  toggleLike(
+                    parseInt(recipeId as string),
+                    authContext?.user?.username as string
+                  )
+                }
+              >
+                {liked ? "Remove Like" : "Like Recipe"}
+              </Button>
             )
-          }
-          style={{ marginTop: "16px" }}
-        >
-          {liked ? "Remove Like" : "Like Recipe"}
-        </Button>
+          ) : (
+            <Typography.Text>
+              You need to be logged in to perform actions
+            </Typography.Text>
+          )}
+        </div>
       </Card>
     </div>
   );

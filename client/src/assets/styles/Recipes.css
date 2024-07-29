@@ -81,10 +81,23 @@
   display: flex;
 }
 
+.recipe-details-img {
+  max-width: 1000px;
+}
+
+.ant-card-cover {
+  display: grid;
+  place-items: center;
+}
+
+.recipe-details-btn {
+  color: black !important;
+}
+
 @media (max-width: 1400px) {
   .recipe-details-card {
     flex-direction: column;
-  }  
+  }
 
   .recipe-details-img {
     height: 50vh;
