@@ -123,6 +123,7 @@ namespace Fridgr.Services.Data.Recipes
         public async Task<RecipeDetailsDTO?> GetRecipeDetailsAsync(int id)
         {
             var recipe = await _recipeRepository.AllAsNoTracking()
+                .Include(r => r.User)
                 .Include(r => r.Instructions)
                 .Include(r => r.Ingredients)
                 .ThenInclude(ri => ri.Ingredient)
@@ -135,6 +136,7 @@ namespace Fridgr.Services.Data.Recipes
                 Id = recipe.Id,
                 Name = recipe.Name,
                 Image = recipe.Image,
+                Owner = recipe.User?.UserName,
                 Ingredients = recipe.Ingredients.Select(ri => ri.Ingredient.Name),
                 Instructions = recipe.Instructions.Select(i => i.Text)
             };
