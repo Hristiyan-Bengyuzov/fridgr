@@ -2,6 +2,7 @@
 using Fridgr.Data.Repositories;
 using Fridgr.Services.Data.Images;
 using Fridgr.Services.Data.Ingredients;
+using Fridgr.Services.Data.Users;
 using Fridgr.Services.Mapping;
 using Fridgr.Web.DTOs.Recipes;
 using Microsoft.EntityFrameworkCore;
@@ -13,12 +14,14 @@ namespace Fridgr.Services.Data.Recipes
         private readonly IRepository<Recipe> _recipeRepository;
         private readonly ICloudinaryService _cloudinaryService;
         private readonly IIngredientService _ingredientService;
+        private readonly IUserService _userService;
 
-        public RecipeService(IRepository<Recipe> recipeRepository, ICloudinaryService cloudinaryService, IIngredientService ingredientService)
+        public RecipeService(IRepository<Recipe> recipeRepository, ICloudinaryService cloudinaryService, IIngredientService ingredientService, IUserService userService)
         {
             _recipeRepository = recipeRepository;
             _cloudinaryService = cloudinaryService;
             _ingredientService = ingredientService;
+            _userService = userService;
         }
 
         public async Task CreateRecipeAsync(CreateRecipeDTO createRecipeDTO)
@@ -26,7 +29,8 @@ namespace Fridgr.Services.Data.Recipes
             var recipe = new Recipe
             {
                 Name = createRecipeDTO.Name,
-                Image = _cloudinaryService.UploadImage(createRecipeDTO.Image)
+                Image = _cloudinaryService.UploadImage(createRecipeDTO.Image),
+                UserId = await _userService.GetUserIdByUsernameAsync(createRecipeDTO.Username),
             };
 
             foreach (var ingredientId in createRecipeDTO.IngredientIds)

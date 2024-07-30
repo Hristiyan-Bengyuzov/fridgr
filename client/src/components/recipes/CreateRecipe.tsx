@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { IngredientsByCategory } from "../../types/ingredients/ingredientDTOs";
 import { fetchIngredientsByCategories } from "../../services/ingredients/ingredientService";
 import IngredientsCatalog from "../Ingredients/IngredientsCatalog";
@@ -14,6 +14,7 @@ import fireSwal from "../../utils/swalUtil";
 import { useNavigate } from "react-router-dom";
 import { CreateRecipeFormValues } from "../../types/recipes/recipeDTOs";
 import axios from "axios";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function CreateRecipe() {
   const [ingredientsByCategories, setIngredientsByCategories] = useState<
@@ -23,6 +24,7 @@ export default function CreateRecipe() {
   const [loading, setLoading] = useState<boolean>(true);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,6 +64,7 @@ export default function CreateRecipe() {
     const formData = new FormData();
 
     formData.append("name", values.recipeName);
+    formData.append("username", authContext?.user?.username as string);
     selectedIngredients.forEach((i) => {
       formData.append("ingredientIds", i.toString());
     });
