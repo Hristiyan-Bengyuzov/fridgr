@@ -5,6 +5,7 @@ import {
   RecipeDTO,
 } from "../../types/recipes/recipeDTOs";
 import fireSwal from "../../utils/swalUtil";
+import Swal from "sweetalert2";
 
 export const getRecipesByIngredients = async (ingredients: number[]) => {
   const queryString = ingredients
@@ -56,5 +57,31 @@ export const editRecipe = async (
     );
   } catch (e) {
     fireSwal("Something went wrong!", "Please try again!", "error", navigate);
+  }
+};
+
+export const deleteRecipe = async (id: number, navigate: any) => {
+  const res = await Swal.fire({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this recipe!",
+    icon: "warning",
+    color: "white",
+    background: "#181a27",
+    confirmButtonColor: "#00b96b",
+    showCancelButton: true,
+  });
+
+  if (res.isConfirmed) {
+    await axios.delete(
+      `${import.meta.env.VITE_API_URL}/api/Recipes/deleteRecipe/${id}`
+    );
+
+    fireSwal(
+      "Recipe successfully deleted!",
+      "You can go back to browsing recipes!",
+      "success",
+      navigate,
+      "/recipes"
+    );
   }
 };

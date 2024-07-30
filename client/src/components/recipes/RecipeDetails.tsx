@@ -11,6 +11,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 import { likeRecipe } from "../../services/recipeLikes/recipeLikesService";
+import { deleteRecipe } from "../../services/recipes/recipeService";
+import { useNavigate } from "react-router-dom";
 import "../../assets/styles/Heart.css";
 
 const { Title } = Typography;
@@ -21,6 +23,7 @@ export default function RecipeDetails() {
   );
   const [liked, setLiked] = useState<boolean>(false);
   const { recipeId } = useParams();
+  const navigate = useNavigate();
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
@@ -42,11 +45,11 @@ export default function RecipeDetails() {
   };
 
   const handleEdit = () => {
-
+    navigate(`/editRecipe/${recipeId}`);
   };
 
-  const handleDelete = () => {
-
+  const handleDelete = async () => {
+    await deleteRecipe(recipeDetails.id, navigate);
   };
 
   return (
