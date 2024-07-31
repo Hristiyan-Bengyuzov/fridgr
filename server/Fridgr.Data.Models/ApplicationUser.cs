@@ -11,5 +11,6 @@ namespace Fridgr.Data.Models
         public DateTime RefreshTokenExpiry { get; set; }
 
         public ICollection<Recipe> Recipes { get; set; } = new HashSet<Recipe>();
+        public ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
     }
 }

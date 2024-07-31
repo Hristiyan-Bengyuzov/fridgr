@@ -20,5 +20,6 @@ namespace Fridgr.Data.Models
 
         public ICollection<Instruction> Instructions { get; set; } = new HashSet<Instruction>();
         public ICollection<RecipeIngredient> Ingredients { get; set; } = new HashSet<RecipeIngredient>();
+        public ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
     }
 }

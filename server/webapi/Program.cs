@@ -6,6 +6,7 @@ using Fridgr.Services.Data.Images;
 using Fridgr.Services.Data.Ingredients;
 using Fridgr.Services.Data.RecipeLikes;
 using Fridgr.Services.Data.Recipes;
+using Fridgr.Services.Data.Reviews;
 using Fridgr.Services.Data.Tokens;
 using Fridgr.Services.Data.Users;
 using Fridgr.Services.Mapping;
@@ -36,6 +37,7 @@ builder.Services.AddTransient<IIngredientService, IngredientService>();
 builder.Services.AddTransient<IRecipeService, RecipeService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IRecipeLikeService, RecipeLikeService>();
+builder.Services.AddTransient<IReviewService, ReviewService>();
 
 builder.Services.AddCors(options =>
 {
