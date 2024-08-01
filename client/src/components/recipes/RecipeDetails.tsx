@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { Card, List, Typography, Button } from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { Card, List, Typography, Button, Modal } from "antd";
 import {
   HeartOutlined,
   HeartFilled,
   EditOutlined,
   DeleteOutlined,
+  StarOutlined,
 } from "@ant-design/icons";
 import { RecipeDetailsDTO } from "../../types/recipes/recipeDTOs";
 import { useParams } from "react-router-dom";
@@ -13,6 +14,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { likeRecipe } from "../../services/recipeLikes/recipeLikesService";
 import { deleteRecipe } from "../../services/recipes/recipeService";
 import { useNavigate } from "react-router-dom";
+import ReviewForm from "../reviews/ReviewForm";
 import "../../assets/styles/Heart.css";
 
 const { Title } = Typography;
@@ -22,6 +24,7 @@ export default function RecipeDetails() {
     {} as RecipeDetailsDTO
   );
   const [liked, setLiked] = useState<boolean>(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const { recipeId } = useParams();
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
@@ -61,7 +64,7 @@ export default function RecipeDetails() {
           <img
             alt={recipeDetails.name}
             src={recipeDetails.image}
-            className="img fluid recipe-details-img"
+            className="img-fluid recipe-details-img"
           />
         }
       >
@@ -112,24 +115,34 @@ export default function RecipeDetails() {
                 </Button>
               </>
             ) : (
-              <Button
-                type="primary"
-                icon={
-                  liked ? (
-                    <HeartFilled className="heart-icon liked" />
-                  ) : (
-                    <HeartOutlined className="heart-icon" />
-                  )
-                }
-                onClick={() =>
-                  toggleLike(
-                    parseInt(recipeId as string),
-                    authContext?.user?.username as string
-                  )
-                }
-              >
-                {liked ? "Remove Like" : "Like Recipe"}
-              </Button>
+              <>
+                <Button
+                  type="primary"
+                  icon={
+                    liked ? (
+                      <HeartFilled className="heart-icon liked" />
+                    ) : (
+                      <HeartOutlined className="heart-icon" />
+                    )
+                  }
+                  onClick={() =>
+                    toggleLike(
+                      parseInt(recipeId as string),
+                      authContext?.user?.username as string
+                    )
+                  }
+                >
+                  {liked ? "Remove Like" : "Like Recipe"}
+                </Button>
+                <Button
+                  icon={<StarOutlined />}
+                  type="primary"
+                  onClick={() => setIsModalVisible(true)}
+                  style={{ marginLeft: "8px" }}
+                >
+                  Write a Review
+                </Button>
+              </>
             )
           ) : (
             <Typography.Text>
@@ -138,6 +151,14 @@ export default function RecipeDetails() {
           )}
         </div>
       </Card>
+      <Modal
+        title="Write a Review"
+        open={isModalVisible}
+        onCancel={() => setIsModalVisible(false)}
+        footer={null}
+      >
+        <ReviewForm recipeId={recipeId} setIsModalVisible={setIsModalVisible} />
+      </Modal>
     </div>
   );
 }

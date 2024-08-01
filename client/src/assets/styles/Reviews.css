@@ -1,0 +1,11 @@
+.review-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-form {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
