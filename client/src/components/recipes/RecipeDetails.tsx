@@ -59,7 +59,7 @@ export default function RecipeDetails() {
     <div className="recipe-details-container">
       <Card
         hoverable
-        className="recipe-details-card"
+        className="recipe-details-card dark-bg no-border"
         cover={
           <img
             alt={recipeDetails.name}
@@ -68,21 +68,27 @@ export default function RecipeDetails() {
           />
         }
       >
-        <Title level={2}>{recipeDetails.name}</Title>
-        <Title level={3}>Ingredients</Title>
+        <Title className="white-text" level={2}>
+          {recipeDetails.name}
+        </Title>
+        <Title className="white-text" level={3}>
+          Ingredients
+        </Title>
         <List
           dataSource={recipeDetails.ingredients}
-          renderItem={(ingredient) => <List.Item>{ingredient}</List.Item>}
+          renderItem={(ingredient) => (
+            <List.Item className="white-text">{ingredient}</List.Item>
+          )}
           bordered
         />
-        <Title level={3} style={{ marginTop: "16px" }}>
+        <Title className="white-text" level={3} style={{ marginTop: "16px" }}>
           Instructions
         </Title>
         <List
           dataSource={recipeDetails.instructions}
           renderItem={(instruction, index) => (
             <List.Item>
-              <Typography.Text>{`${
+              <Typography.Text className="white-text">{`${
                 index + 1
               }. ${instruction}`}</Typography.Text>
             </List.Item>

@@ -94,6 +94,18 @@
   color: black !important;
 }
 
+.white-text {
+  color: white !important;
+}
+
+.dark-bg {
+  background-color: #181a27 !important;
+}
+
+.no-border {
+  border: none !important;
+}
+
 @media (max-width: 1400px) {
   .recipe-details-card {
     flex-direction: column;
