@@ -6,5 +6,6 @@ namespace Fridgr.Services.Data.Reviews
     {
         Task CreateReviewAsync(CreateReviewDTO createReviewDTO);
         Task<bool> UserReviewedRecipeAsync(int recipeId, string username);
+        Task<PagedReviewsDTO> GetReviewsAsync(ReviewQueryModel queryModel);
     }
 }

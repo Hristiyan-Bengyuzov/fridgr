@@ -16,7 +16,7 @@ namespace webapi.Controllers
         }
 
         [HttpPost("reviewRecipe")]
-        public async Task<IActionResult> LikeRecipe(CreateReviewDTO createReviewDTO)
+        public async Task<IActionResult> ReviewRecipe(CreateReviewDTO createReviewDTO)
         {
             if (await _reviewService.UserReviewedRecipeAsync(createReviewDTO.RecipeId, createReviewDTO.Username))
             {
@@ -25,6 +25,13 @@ namespace webapi.Controllers
 
             await _reviewService.CreateReviewAsync(createReviewDTO);
             return Ok("Successfully written review.");
+        }
+
+        [HttpGet("getReviews")]
+        public async Task<ActionResult<PagedReviewsDTO>> GetReviews([FromQuery] ReviewQueryModel queryModel)
+        {
+            var pagedDTO = await _reviewService.GetReviewsAsync(queryModel);
+            return Ok(pagedDTO);
         }
     }
 }
