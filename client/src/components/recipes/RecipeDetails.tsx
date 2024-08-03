@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Card, List, Typography, Button, Modal } from "antd";
+import { useContext, useEffect, useState } from "react";
+import { Card, List, Typography, Button, Modal, Spin } from "antd";
 import {
   HeartOutlined,
   HeartFilled,
@@ -8,13 +8,18 @@ import {
   StarOutlined,
 } from "@ant-design/icons";
 import { RecipeDetailsDTO } from "../../types/recipes/recipeDTOs";
+import { ReviewDTO } from "../../types/reviews/reviewDTOs";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 import { likeRecipe } from "../../services/recipeLikes/recipeLikesService";
-import { deleteRecipe } from "../../services/recipes/recipeService";
+import {
+  deleteRecipe,
+  getRecipeDetails,
+} from "../../services/recipes/recipeService";
+import { getReviews } from "../../services/reviews/reviewService";
 import { useNavigate } from "react-router-dom";
 import ReviewForm from "../reviews/ReviewForm";
+import ReviewList from "../reviews/ReviewList";
 import "../../assets/styles/Heart.css";
 
 const { Title } = Typography;
@@ -28,19 +33,39 @@ export default function RecipeDetails() {
   const { recipeId } = useParams();
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
+  const [reviews, setReviews] = useState<ReviewDTO[]>([]);
+  const [totalReviews, setTotalReviews] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchRecipeDetails = async () => {
-      const response = await axios.get(
-        `${
-          import.meta.env.VITE_API_URL
-        }/api/Recipes/getRecipeDetails/${recipeId}`
-      );
-      setRecipeDetails(response.data);
+    const fetchData = async () => {
+      try {
+        setRecipeDetails(await getRecipeDetails(recipeId as string));
+      } catch (error) {
+        console.error("Failed to fetch recipe details:", error);
+      }
     };
 
-    fetchRecipeDetails();
+    fetchData();
   }, [recipeId]);
+
+  useEffect(() => {
+    const fetchReviewData = async () => {
+      setLoading(true);
+      try {
+        const reviewData = await getReviews(recipeId as string, currentPage);
+        setReviews(reviewData.reviews);
+        setTotalReviews(reviewData.totalReviews);
+      } catch (error) {
+        console.error("Failed to fetch reviews:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReviewData();
+  }, [recipeId, currentPage]);
 
   const toggleLike = async (recipeId: number, username: string) => {
     setLiked(!liked);
@@ -53,6 +78,10 @@ export default function RecipeDetails() {
 
   const handleDelete = async () => {
     await deleteRecipe(recipeDetails.id, navigate);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -163,8 +192,23 @@ export default function RecipeDetails() {
         onCancel={() => setIsModalVisible(false)}
         footer={null}
       >
-        <ReviewForm recipeId={recipeId} setIsModalVisible={setIsModalVisible} />
+        <ReviewForm
+          recipeId={recipeId}
+          setIsModalVisible={setIsModalVisible}
+          setReviews={setReviews}
+          setTotalReviews={setTotalReviews}
+        />
       </Modal>
+      {loading ? (
+        <Spin size="large" />
+      ) : (
+        <ReviewList
+          reviews={reviews}
+          totalReviews={totalReviews}
+          currentPage={currentPage}
+          handlePageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 }

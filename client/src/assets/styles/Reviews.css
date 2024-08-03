@@ -9,3 +9,7 @@
   max-width: 1200px;
   padding: 20px;
 }
+
+.ant-list-item-meta-title {
+  color: white !important;
+}

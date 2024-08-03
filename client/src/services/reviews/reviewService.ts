@@ -1,13 +1,18 @@
 import axios, { AxiosError } from "axios";
-import { CreateReviewDTO } from "../../types/reviews/reviewDTOs";
+import {
+  CreateReviewDTO,
+  PagedReviewsDTO,
+} from "../../types/reviews/reviewDTOs";
 import fireSwal from "../../utils/swalUtil";
 
 export const reviewRecipe = async (createReviewDTO: CreateReviewDTO) => {
   try {
-    await axios.post(
+    const response = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/Reviews/reviewRecipe`,
       createReviewDTO
     );
+
+    return response.data;
   } catch (e) {
     const error = e as AxiosError;
 
@@ -20,4 +25,17 @@ export const reviewRecipe = async (createReviewDTO: CreateReviewDTO) => {
       );
     }
   }
+};
+
+export const getReviews = async (
+  recipeId: string,
+  currentPage: number
+): Promise<PagedReviewsDTO> => {
+  const response = await axios.get<PagedReviewsDTO>(
+    `${import.meta.env.VITE_API_URL}/api/Reviews/getReviews`,
+    {
+      params: { recipeId: recipeId, currentPage: currentPage },
+    }
+  );
+  return response.data;
 };

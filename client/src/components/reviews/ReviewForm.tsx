@@ -5,10 +5,16 @@ import { AuthContext } from "../../contexts/AuthContext";
 import {
   CreateReviewDTO,
   CreateReviewFormValues,
+  ReviewDTO,
 } from "../../types/reviews/reviewDTOs";
 import { reviewRecipe } from "../../services/reviews/reviewService";
 
-const ReviewForm = ({ recipeId, setIsModalVisible }: any) => {
+export default function ReviewForm({
+  recipeId,
+  setIsModalVisible,
+  setReviews,
+  setTotalReviews,
+}: any) {
   const [form] = Form.useForm();
   const authContext = useContext(AuthContext);
 
@@ -20,9 +26,21 @@ const ReviewForm = ({ recipeId, setIsModalVisible }: any) => {
       stars: values.rating,
     };
 
-    await reviewRecipe(createReviewDTO);
+    const reviewDTO: ReviewDTO = {
+      username: authContext?.user?.username as string,
+      image: authContext?.user?.image as string,
+      text: values.review,
+      stars: values.rating,
+    };
+
+    const response = await reviewRecipe(createReviewDTO);
     setIsModalVisible(false);
     form.resetFields();
+
+    if (response) {
+      setReviews((prevReviews: ReviewDTO[]) => [reviewDTO, ...prevReviews]);
+      setTotalReviews((prevTotal: number) => prevTotal + 1);
+    }
   };
 
   return (
@@ -55,6 +73,4 @@ const ReviewForm = ({ recipeId, setIsModalVisible }: any) => {
       </Form>
     </div>
   );
-};
-
-export default ReviewForm;
+}

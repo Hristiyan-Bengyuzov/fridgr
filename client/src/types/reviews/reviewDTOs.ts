@@ -9,3 +9,15 @@ export interface CreateReviewFormValues {
   review: string;
   rating: number;
 }
+
+export interface PagedReviewsDTO {
+  totalReviews: number;
+  reviews: ReviewDTO[];
+}
+
+export interface ReviewDTO {
+  username: string;
+  image: string;
+  text: string;
+  stars: number;
+}
