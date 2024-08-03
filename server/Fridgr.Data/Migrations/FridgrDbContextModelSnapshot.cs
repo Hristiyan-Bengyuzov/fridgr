@@ -110,7 +110,7 @@ namespace Fridgr.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FoodCategories");
+                    b.ToTable("FoodCategories", (string)null);
                 });
 
             modelBuilder.Entity("Fridgr.Data.Models.Ingredient", b =>
@@ -132,7 +132,7 @@ namespace Fridgr.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Ingredients");
+                    b.ToTable("Ingredients", (string)null);
                 });
 
             modelBuilder.Entity("Fridgr.Data.Models.Instruction", b =>
@@ -154,7 +154,7 @@ namespace Fridgr.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Instructions");
+                    b.ToTable("Instructions", (string)null);
                 });
 
             modelBuilder.Entity("Fridgr.Data.Models.Recipe", b =>
@@ -179,7 +179,7 @@ namespace Fridgr.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Recipes");
+                    b.ToTable("Recipes", (string)null);
                 });
 
             modelBuilder.Entity("Fridgr.Data.Models.RecipeIngredient", b =>
@@ -194,7 +194,7 @@ namespace Fridgr.Data.Migrations
 
                     b.HasIndex("IngredientId");
 
-                    b.ToTable("RecipeIngredients");
+                    b.ToTable("RecipeIngredients", (string)null);
                 });
 
             modelBuilder.Entity("Fridgr.Data.Models.RecipeLike", b =>
@@ -209,7 +209,7 @@ namespace Fridgr.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RecipeLikes");
+                    b.ToTable("RecipeLikes", (string)null);
                 });
 
             modelBuilder.Entity("Fridgr.Data.Models.Review", b =>
@@ -231,7 +231,7 @@ namespace Fridgr.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
