@@ -1,5 +1,6 @@
 ﻿using Fridgr.Services.Data.RecipeLikes;
 using Fridgr.Web.DTOs.LikeRecipes;
+using Fridgr.Web.DTOs.Recipes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace webapi.Controllers
@@ -26,6 +27,20 @@ namespace webapi.Controllers
 
             await _recipeLikeService.LikeRecipeAsync(likeRecipeRequest.RecipeId, likeRecipeRequest.Username);
             return Ok("Recipe liked.");
+        }
+
+        [HttpGet("getLikedRecipes/{username}")]
+        public async Task<ActionResult<IEnumerable<RecipeDTO>>> GetUsersLikesRecipes(string username)
+        {
+            try
+            {
+                var likedRecipes = await _recipeLikeService.GetUsersLikedAsync(username);
+                return Ok(likedRecipes);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Fridgr.Data.Models;
 using Fridgr.Data.Repositories;
 using Fridgr.Services.Data.Users;
+using Fridgr.Web.DTOs.Recipes;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fridgr.Services.Data.RecipeLikes
@@ -22,6 +23,23 @@ namespace Fridgr.Services.Data.RecipeLikes
             var recipeLike = await _recipeLikeRepository.All().FirstAsync(rl => rl.RecipeId == recipeId && rl.UserId == userId);
             _recipeLikeRepository.Delete(recipeLike);
             await _recipeLikeRepository.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<RecipeDTO>> GetUsersLikedAsync(string username)
+        {
+            var likedRecipes = await _recipeLikeRepository.AllAsNoTracking()
+                .Include(rl => rl.User)
+                .Include(rl => rl.Recipe)
+                .Where(rl => rl.User.UserName == username)
+                .Select(rl => new RecipeDTO
+                {
+                    Id = rl.RecipeId,
+                    Name = rl.Recipe.Name,
+                    Image = rl.Recipe.Image,
+                })
+                .ToListAsync();
+
+            return likedRecipes;
         }
 
         public async Task LikeRecipeAsync(int recipeId, string username)
