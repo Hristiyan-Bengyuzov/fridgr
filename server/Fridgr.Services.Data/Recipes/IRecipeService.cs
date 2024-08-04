@@ -10,5 +10,6 @@ namespace Fridgr.Services.Data.Recipes
         Task<EditRecipeDTO> GetEditRecipeDTO(int id);
         Task EditRecipeAsync(EditRecipeDTO editRecipeDTO);
         Task DeleteRecipeAsync(int id);
+        Task<IEnumerable<RecipeDTO>> GetUsersRecipesAsync(string username);
     }
 }

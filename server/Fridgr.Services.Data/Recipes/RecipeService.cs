@@ -152,5 +152,16 @@ namespace Fridgr.Services.Data.Recipes
 
             return recipes;
         }
+
+        public async Task<IEnumerable<RecipeDTO>> GetUsersRecipesAsync(string username)
+        {
+            var recipes = await _recipeRepository.AllAsNoTracking()
+               .Include(r => r.User)
+               .Where(r => r.User!.UserName == username)
+               .To<RecipeDTO>()
+               .ToListAsync();
+
+            return recipes;
+        }
     }
 }

@@ -71,6 +71,20 @@ namespace webapi.Controllers
             }
         }
 
+        [HttpGet("getUsersRecipes/{username}")]
+        public async Task<ActionResult<IEnumerable<RecipeDTO>>> GetUsersRecipes(string username)
+        {
+            try
+            {
+                var recipes = await _recipeService.GetUsersRecipesAsync(username);
+                return Ok(recipes);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
         [HttpDelete("deleteRecipe/{id}")]
         public async Task<IActionResult> DeleteRecipe(int id)
         {
@@ -84,6 +98,5 @@ namespace webapi.Controllers
                 return StatusCode(500);
             }
         }
-
     }
 }
