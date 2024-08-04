@@ -55,6 +55,25 @@ namespace Fridgr.Services.Data.Reviews
             };
         }
 
+        public async Task<IEnumerable<UserReviewDTO>> GetUsersReviews(string username)
+        {
+            var reviews = await _reviewRepository.AllAsNoTracking()
+                .Include(r => r.User)
+                .Include(r => r.Recipe)
+                .Where(r => r.User.UserName == username)
+                .Select(r => new UserReviewDTO
+                {
+                    Id = r.Recipe.Id,
+                    Recipe = r.Recipe.Name,
+                    Image = r.Recipe.Image,
+                    Text = r.Text,
+                    Stars = r.Stars,
+                })
+                .ToListAsync();
+
+            return reviews;
+        }
+
         public async Task<bool> UserReviewedRecipeAsync(int recipeId, string username)
         {
             string userId = await _userService.GetUserIdByUsernameAsync(username);

@@ -33,5 +33,19 @@ namespace webapi.Controllers
             var pagedDTO = await _reviewService.GetReviewsAsync(queryModel);
             return Ok(pagedDTO);
         }
+
+        [HttpGet("getUsersReviews/{username}")]
+        public async Task<ActionResult<IEnumerable<UserReviewDTO>>> GetUsersReviews(string username)
+        {
+            try
+            {
+                var reviews = await _reviewService.GetUsersReviews(username);
+                return Ok(reviews);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }
