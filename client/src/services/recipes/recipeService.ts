@@ -3,7 +3,7 @@ import {
   CreateRecipeFormValues,
   EditRecipeDTO,
   RecipeDTO,
-  RecipeDetailsDTO
+  RecipeDetailsDTO,
 } from "../../types/recipes/recipeDTOs";
 import fireSwal from "../../utils/swalUtil";
 import Swal from "sweetalert2";
@@ -87,9 +87,21 @@ export const deleteRecipe = async (id: number, navigate: any) => {
   }
 };
 
-export const getRecipeDetails = async (recipeId: string): Promise<RecipeDetailsDTO> => {
+export const getRecipeDetails = async (
+  recipeId: string
+): Promise<RecipeDetailsDTO> => {
   const response = await axios.get<RecipeDetailsDTO>(
     `${import.meta.env.VITE_API_URL}/api/Recipes/getRecipeDetails/${recipeId}`
   );
   return response.data;
+};
+
+export const getUsersRecipes = async (
+  username: string
+): Promise<RecipeDTO[]> => {
+  const result = await axios.get<RecipeDTO[]>(
+    `${import.meta.env.VITE_API_URL}/api/Recipes/getUsersRecipes/${username}`
+  );
+
+  return result.data;
 };

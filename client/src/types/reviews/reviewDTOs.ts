@@ -21,3 +21,11 @@ export interface ReviewDTO {
   text: string;
   stars: number;
 }
+
+export interface UsersReviewsDTO {
+  id: number;
+  text: string;
+  stars: number;
+  recipe: string;
+  image: string;
+}

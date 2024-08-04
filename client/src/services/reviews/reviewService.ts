@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import {
   CreateReviewDTO,
   PagedReviewsDTO,
+  UsersReviewsDTO,
 } from "../../types/reviews/reviewDTOs";
 import fireSwal from "../../utils/swalUtil";
 
@@ -38,4 +39,14 @@ export const getReviews = async (
     }
   );
   return response.data;
+};
+
+export const getUsersReviews = async (
+  username: string
+): Promise<UsersReviewsDTO[]> => {
+  const result = await axios.get<UsersReviewsDTO[]>(
+    `${import.meta.env.VITE_API_URL}/api/Reviews/getUsersReviews/${username}`
+  );
+
+  return result.data;
 };
