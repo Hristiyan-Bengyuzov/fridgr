@@ -9,5 +9,6 @@ namespace Fridgr.Services.Data.Reviews
         Task<PagedReviewsDTO> GetReviewsAsync(ReviewQueryModel queryModel);
         Task<IEnumerable<UserReviewDTO>> GetUsersReviews(string username);
         Task EditReviewAsync(EditReviewDTO editReviewDTO);
+        Task DeleteReviewAsync(DeleteReviewDTO deleteReviewDTO);
     }
 }

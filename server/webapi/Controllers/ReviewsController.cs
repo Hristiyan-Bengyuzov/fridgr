@@ -61,5 +61,19 @@ namespace webapi.Controllers
                 return StatusCode(500);
             }
         }
+
+        [HttpDelete("deleteReview")]
+        public async Task<IActionResult> DeleteReview(DeleteReviewDTO deleteReviewDTO)
+        {
+            try
+            {
+                await _reviewService.DeleteReviewAsync(deleteReviewDTO);
+                return Ok("Deleted review.");
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }

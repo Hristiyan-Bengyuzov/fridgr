@@ -30,6 +30,17 @@ namespace Fridgr.Services.Data.Reviews
             await _reviewRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteReviewAsync(DeleteReviewDTO deleteReviewDTO)
+        {
+            string userId = await _userService.GetUserIdByUsernameAsync(deleteReviewDTO.Username);
+
+            var review = _reviewRepository.All()
+                .First(r => r.RecipeId == deleteReviewDTO.RecipeId && r.UserId == userId);
+
+            _reviewRepository.Delete(review);
+            await _reviewRepository.SaveChangesAsync();
+        }
+
         public async Task EditReviewAsync(EditReviewDTO editReviewDTO)
         {
             var review = _reviewRepository.All()
