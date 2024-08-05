@@ -50,7 +50,7 @@ function App() {
             <Route path="/editRecipe/:recipeId" element={<EditRecipe />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:username" element={<Profile />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
           <Footer />

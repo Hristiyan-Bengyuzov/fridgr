@@ -8,6 +8,7 @@ import UserCard from "./UserCard";
 import { RecipeDTO } from "../../types/recipes/recipeDTOs";
 import { UsersReviewsDTO } from "../../types/reviews/reviewDTOs";
 import ProfileTable from "./ProfileTable";
+import { useParams } from "react-router-dom";
 
 export default function Profile() {
   const [userDetails, setUserDetails] = useState<UserDetailsDTO>(
@@ -18,19 +19,18 @@ export default function Profile() {
   const [likedRecipes, setLikedRecipes] = useState<RecipeDTO[]>([]);
   const [reviews, setReviews] = useState<UsersReviewsDTO[]>([]);
   const authContext = useContext(AuthContext);
+  const { username } = useParams();
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       const response = await axios.get<UserDetailsDTO>(
-        `${import.meta.env.VITE_API_URL}/api/Users/getUserDetails/${
-          authContext?.user?.username
-        }`
+        `${import.meta.env.VITE_API_URL}/api/Users/getUserDetails/${username}`
       );
       setUserDetails(response.data);
     };
 
     fetchUserDetails();
-  }, [authContext?.user?.username]);
+  }, [username]);
 
   return (
     <div className="profile-container">

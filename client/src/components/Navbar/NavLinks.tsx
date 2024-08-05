@@ -70,7 +70,7 @@ export default function NavLinks({ expanded, setExpanded }: NavTogglerProps) {
                 placement="bottom"
               >
                 <Link
-                  to="/profile"
+                  to={`/profile/${authContext.user.username}`}
                   className="nav-link"
                   onClick={() => setExpanded(false)}
                 >
