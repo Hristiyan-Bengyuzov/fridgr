@@ -1,5 +1,6 @@
 import { List, Avatar, Rate, Pagination } from "antd";
 import { ReviewDTO } from "../../types/reviews/reviewDTOs";
+import { useNavigate } from "react-router-dom";
 
 interface ReviewsListProps {
   reviews: ReviewDTO[];
@@ -14,13 +15,18 @@ export default function ReviewsList({
   currentPage,
   handlePageChange,
 }: ReviewsListProps) {
+  const navigate = useNavigate();
+
   return (
     <div className="dark-bg" style={{ padding: 30 }}>
       <List
         itemLayout="horizontal"
         dataSource={reviews}
         renderItem={(review) => (
-          <List.Item>
+          <List.Item
+            className="review-to-profile"
+            onClick={() => navigate(`/profile/${review.username}`)}
+          >
             <List.Item.Meta
               avatar={<Avatar src={review.image} />}
               title={review.username}

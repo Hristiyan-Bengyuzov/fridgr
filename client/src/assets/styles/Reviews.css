@@ -13,3 +13,7 @@
 .ant-list-item-meta-title {
   color: white !important;
 }
+
+.review-to-profile:hover {
+  cursor: pointer;
+}
