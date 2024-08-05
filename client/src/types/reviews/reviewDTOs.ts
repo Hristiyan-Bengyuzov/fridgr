@@ -29,3 +29,15 @@ export interface UsersReviewsDTO {
   recipe: string;
   image: string;
 }
+
+export interface EditReviewDTO {
+  recipeId: number;
+  username: string;
+  text: string;
+  stars: number;
+}
+
+export interface DeleteReviewDTO {
+  recipeId: number;
+  username: string;
+}

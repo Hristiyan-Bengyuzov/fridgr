@@ -1,10 +1,13 @@
 import axios, { AxiosError } from "axios";
 import {
   CreateReviewDTO,
+  DeleteReviewDTO,
+  EditReviewDTO,
   PagedReviewsDTO,
   UsersReviewsDTO,
 } from "../../types/reviews/reviewDTOs";
 import fireSwal from "../../utils/swalUtil";
+import Swal from "sweetalert2";
 
 export const reviewRecipe = async (createReviewDTO: CreateReviewDTO) => {
   try {
@@ -49,4 +52,35 @@ export const getUsersReviews = async (
   );
 
   return result.data;
+};
+
+export const editReview = async (editReviewDTO: EditReviewDTO) => {
+  const result = await axios.post(
+    `${import.meta.env.VITE_API_URL}/api/Reviews/editReview`,
+    editReviewDTO
+  );
+  return result;
+};
+
+export const deleteReview = async (deleteReviewDTO: DeleteReviewDTO) => {
+  const res = await Swal.fire({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this review!",
+    icon: "warning",
+    color: "white",
+    background: "#181a27",
+    confirmButtonColor: "#00b96b",
+    showCancelButton: true,
+  });
+
+  if (res.isConfirmed) {
+    await axios.delete(
+      `${import.meta.env.VITE_API_URL}/api/Reviews/deleteReview`,
+      {
+        data: deleteReviewDTO,
+      }
+    );
+
+    fireSwal("Review successfully deleted!", "", "success", null);
+  }
 };
