@@ -7,5 +7,26 @@
 }
 
 .ant-statistic-content-value-int {
-    color: white;
+  color: white;
+}
+
+.segment {
+  display: flex;
+  gap: 10px;
+}
+
+.ant-segmented-item-selected {
+  background-color: #00b96b !important;
+}
+
+.user-avatar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-user-container {
+  width: 80%;
+  align-items: center;
+  justify-content: center;
 }

@@ -5,11 +5,18 @@ import { Spin } from "antd";
 import "../../assets/styles/Profile.css";
 import axios from "axios";
 import UserCard from "./UserCard";
+import { RecipeDTO } from "../../types/recipes/recipeDTOs";
+import { UsersReviewsDTO } from "../../types/reviews/reviewDTOs";
+import ProfileTable from "./ProfileTable";
 
 export default function Profile() {
   const [userDetails, setUserDetails] = useState<UserDetailsDTO>(
     {} as UserDetailsDTO
   );
+  const [segment, setSegment] = useState<string | null>(null);
+  const [recipes, setRecipes] = useState<RecipeDTO[]>([]);
+  const [likedRecipes, setLikedRecipes] = useState<RecipeDTO[]>([]);
+  const [reviews, setReviews] = useState<UsersReviewsDTO[]>([]);
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
@@ -28,7 +35,24 @@ export default function Profile() {
   return (
     <div className="profile-container">
       {authContext?.user?.username ? (
-        <UserCard userDetails={userDetails} />
+        <>
+          <div className="profile-user-container">
+            <UserCard
+              userDetails={userDetails}
+              segment={segment}
+              setSegment={setSegment}
+              setRecipes={setRecipes}
+              setLikedRecipes={setLikedRecipes}
+              setReviews={setReviews}
+            />
+            <ProfileTable
+              segment={segment as string}
+              recipes={recipes}
+              likedRecipes={likedRecipes}
+              reviews={reviews}
+            />
+          </div>
+        </>
       ) : (
         <Spin />
       )}
