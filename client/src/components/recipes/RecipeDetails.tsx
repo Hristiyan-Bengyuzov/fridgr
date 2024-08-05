@@ -193,10 +193,11 @@ export default function RecipeDetails() {
         footer={null}
       >
         <ReviewForm
-          recipeId={recipeId}
+          recipeId={recipeId as string}
           setIsModalVisible={setIsModalVisible}
           setReviews={setReviews}
           setTotalReviews={setTotalReviews}
+          requestType="create"
         />
       </Modal>
       {loading ? (

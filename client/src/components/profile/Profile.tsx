@@ -46,10 +46,12 @@ export default function Profile() {
               setReviews={setReviews}
             />
             <ProfileTable
+              userDetails={userDetails}
               segment={segment as string}
               recipes={recipes}
               likedRecipes={likedRecipes}
               reviews={reviews}
+              setReviews={setReviews}
             />
           </div>
         </>

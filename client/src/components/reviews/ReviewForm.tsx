@@ -5,42 +5,82 @@ import { AuthContext } from "../../contexts/AuthContext";
 import {
   CreateReviewDTO,
   CreateReviewFormValues,
+  EditReviewDTO,
   ReviewDTO,
+  UsersReviewsDTO,
 } from "../../types/reviews/reviewDTOs";
-import { reviewRecipe } from "../../services/reviews/reviewService";
+import { editReview, reviewRecipe } from "../../services/reviews/reviewService";
+
+interface ReviewFormProps {
+  recipeId: string;
+  setIsModalVisible: (visible: boolean) => void;
+  setReviews: (reviews: any) => void;
+  setTotalReviews?: any;
+  requestType: "create" | "edit";
+  reviewToEdit?: UsersReviewsDTO;
+}
 
 export default function ReviewForm({
   recipeId,
   setIsModalVisible,
   setReviews,
   setTotalReviews,
-}: any) {
+  requestType,
+  reviewToEdit,
+}: ReviewFormProps) {
   const [form] = Form.useForm();
   const authContext = useContext(AuthContext);
 
+  if (requestType === "edit" && reviewToEdit) {
+    form.setFieldsValue({
+      review: reviewToEdit.text,
+      rating: reviewToEdit.stars,
+    });
+  }
+
   const onFinish = async (values: CreateReviewFormValues) => {
-    const createReviewDTO: CreateReviewDTO = {
-      recipeId: recipeId,
-      username: authContext?.user?.username as string,
-      text: values.review,
-      stars: values.rating,
-    };
+    if (requestType === "create") {
+      const createReviewDTO: CreateReviewDTO = {
+        recipeId: parseInt(recipeId),
+        username: authContext?.user?.username as string,
+        text: values.review,
+        stars: values.rating,
+      };
 
-    const reviewDTO: ReviewDTO = {
-      username: authContext?.user?.username as string,
-      image: authContext?.user?.image as string,
-      text: values.review,
-      stars: values.rating,
-    };
+      const reviewDTO: ReviewDTO = {
+        username: authContext?.user?.username as string,
+        image: authContext?.user?.image as string,
+        text: values.review,
+        stars: values.rating,
+      };
 
-    const response = await reviewRecipe(createReviewDTO);
+      const response = await reviewRecipe(createReviewDTO);
+      if (response) {
+        setReviews((prevReviews: ReviewDTO[]) => [reviewDTO, ...prevReviews]);
+        setTotalReviews((prevTotal: number) => prevTotal + 1);
+      }
+    } else if (requestType === "edit" && reviewToEdit) {
+      const editReviewDTO: EditReviewDTO = {
+        recipeId: parseInt(recipeId),
+        username: authContext?.user?.username as string,
+        text: values.review,
+        stars: values.rating,
+      };
+
+      const response = await editReview(editReviewDTO);
+      if (response) {
+        setReviews((prevReviews: UsersReviewsDTO[]) =>
+          prevReviews.map((review: UsersReviewsDTO) =>
+            review.id === reviewToEdit.id
+              ? { ...review, text: values.review, stars: values.rating }
+              : review
+          )
+        );
+      }
+    }
+
     setIsModalVisible(false);
     form.resetFields();
-
-    if (response) {
-      setReviews((prevReviews: ReviewDTO[]) => [reviewDTO, ...prevReviews]);
-      setTotalReviews((prevTotal: number) => prevTotal + 1);
-    }
   };
 
   return (
