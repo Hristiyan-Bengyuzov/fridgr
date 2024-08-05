@@ -8,5 +8,6 @@ namespace Fridgr.Services.Data.Reviews
         Task<bool> UserReviewedRecipeAsync(int recipeId, string username);
         Task<PagedReviewsDTO> GetReviewsAsync(ReviewQueryModel queryModel);
         Task<IEnumerable<UserReviewDTO>> GetUsersReviews(string username);
+        Task EditReviewAsync(EditReviewDTO editReviewDTO);
     }
 }

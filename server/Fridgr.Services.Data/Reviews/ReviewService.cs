@@ -30,6 +30,18 @@ namespace Fridgr.Services.Data.Reviews
             await _reviewRepository.SaveChangesAsync();
         }
 
+        public async Task EditReviewAsync(EditReviewDTO editReviewDTO)
+        {
+            var review = _reviewRepository.All()
+                .Include(r => r.User)
+                .First(r => r.RecipeId == editReviewDTO.RecipeId && r.User.UserName == editReviewDTO.Username);
+
+            review.Text = editReviewDTO.Text;
+            review.Stars = editReviewDTO.Stars;
+
+            await _reviewRepository.SaveChangesAsync();
+        }
+
         public async Task<PagedReviewsDTO> GetReviewsAsync(ReviewQueryModel queryModel)
         {
             var reviews = await _reviewRepository.AllAsNoTracking()

@@ -47,5 +47,19 @@ namespace webapi.Controllers
                 return StatusCode(500);
             }
         }
+
+        [HttpPost("editReview")]
+        public async Task<IActionResult> EditReview(EditReviewDTO editReviewDTO)
+        {
+            try
+            {
+                await _reviewService.EditReviewAsync(editReviewDTO);
+                return Ok("Edited review.");
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }
