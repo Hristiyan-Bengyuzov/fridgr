@@ -20,3 +20,19 @@ export const getUsersLikedRecipes = async (
 
   return result.data;
 };
+
+export const getIsRecipeLiked = async (
+  recipeLikeRequest: RecipeLikeRequest
+) => {
+  const result = await axios.get<boolean>(
+    `${import.meta.env.VITE_API_URL}/api/RecipeLikes/isRecipeLiked/`,
+    {
+      params: {
+        recipeId: recipeLikeRequest.recipeId,
+        username: recipeLikeRequest.username,
+      },
+    }
+  );
+
+  return result.data;
+};

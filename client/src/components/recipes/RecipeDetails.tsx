@@ -11,7 +11,10 @@ import { RecipeDetailsDTO } from "../../types/recipes/recipeDTOs";
 import { ReviewDTO } from "../../types/reviews/reviewDTOs";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import { likeRecipe } from "../../services/recipeLikes/recipeLikesService";
+import {
+  getIsRecipeLiked,
+  likeRecipe,
+} from "../../services/recipeLikes/recipeLikesService";
 import {
   deleteRecipe,
   getRecipeDetails,
@@ -38,6 +41,7 @@ export default function RecipeDetails() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true);
 
+  // load initial recipe data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,6 +54,25 @@ export default function RecipeDetails() {
     fetchData();
   }, [recipeId]);
 
+  // load if recipe is liked when user loads
+  useEffect(() => {
+    const fetchIsLiked = async () => {
+      try {
+        setLiked(
+          await getIsRecipeLiked({
+            recipeId: parseInt(recipeId as string),
+            username: authContext?.user?.username as string,
+          })
+        );
+      } catch (error) {
+        console.error("Failed to fetch recipe details:", error);
+      }
+    };
+
+    fetchIsLiked();
+  }, [recipeId, authContext?.user?.username]);
+
+  // load reviews on page change
   useEffect(() => {
     const fetchReviewData = async () => {
       setLoading(true);
