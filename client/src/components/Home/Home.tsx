@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import HeroImg from "../../assets/images/hero.png";
 import "../../assets/styles/Home.css";
+import { Button } from "antd";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -15,13 +16,12 @@ export default function Home() {
             goodbye to meal planning stress and hello to delicious discoveries!
             Enter the ingredients in your fridge and cook away!
           </p>
-          <button
-            type="button"
+          <Button
             className="btn browse-btn"
             onClick={() => navigate("/recipes")}
           >
             Start browsing
-          </button>
+          </Button>
         </div>
         <div className="hero-wrapper">
           <img className="hero-img" src={HeroImg} alt="" />
