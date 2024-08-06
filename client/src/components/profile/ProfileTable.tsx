@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Table, Space, Button, Modal } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import { RecipeDTO } from "../../types/recipes/recipeDTOs";
@@ -7,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { deleteRecipe } from "../../services/recipes/recipeService";
 import { UserDetailsDTO } from "../../types/users/userDTOs";
 import { deleteReview } from "../../services/reviews/reviewService";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import ReviewForm from "../reviews/ReviewForm";
 
@@ -75,6 +74,9 @@ export default function ProfileTable({
             </Button>
             {authContext?.user?.username === userDetails.username && (
               <>
+                <Button onClick={() => navigate(`/editRecipe/${record.id}`)}>
+                  Edit
+                </Button>
                 <Button
                   onClick={async () => await deleteRecipe(record.id, null)}
                   danger
@@ -147,11 +149,13 @@ export default function ProfileTable({
   } as any;
 
   return (
-    <Table
-      columns={columns[segment]}
-      dataSource={dataSource[segment]}
-      rowKey={(record) => record.id}
-      style={{ marginTop: 32 }}
-    />
+    <div className="profile-table-container">
+      <Table
+        columns={columns[segment]}
+        dataSource={dataSource[segment]}
+        rowKey={(record) => record.id}
+        style={{ marginTop: 32 }}
+      />
+    </div>
   );
 }

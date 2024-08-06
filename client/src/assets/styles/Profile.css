@@ -26,7 +26,32 @@
 }
 
 .profile-user-container {
-  width: 80%;
+  width: 90%;
   align-items: center;
   justify-content: center;
+}
+
+.profile-table-container {
+  overflow-x: auto;
+}
+
+.ant-table-content {
+  display: block;
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .segment {
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+  }
+
+  .profile-user-container {
+    width: 100%;
+  }
+
+  .profile-table-container {
+    width: 100%;
+  }
 }

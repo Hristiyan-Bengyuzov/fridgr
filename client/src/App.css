@@ -13,3 +13,8 @@
   flex-direction: column;
   background-color: #282c34;
 }
+
+html,
+body {
+  overflow-x: hidden;
+}
