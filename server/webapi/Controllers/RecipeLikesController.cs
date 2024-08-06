@@ -42,5 +42,12 @@ namespace webapi.Controllers
                 return StatusCode(500);
             }
         }
+
+        [HttpGet("isRecipeLiked")]
+        public async Task<ActionResult<bool>> IsRecipeLiked([FromQuery] LikeRecipeRequest likeRecipeRequest)
+        {
+            bool isLiked = await _recipeLikeService.UserLikedRecipeAsync(likeRecipeRequest.RecipeId, likeRecipeRequest.Username);
+            return Ok(isLiked);
+        }
     }
 }
