@@ -40,6 +40,13 @@
   overflow-x: auto;
 }
 
+.ant-table-cell-row-hover,
+table,
+th {
+  background-color: #181a27 !important;
+  color: white !important;
+}
+
 @media (max-width: 768px) {
   .segment {
     flex-direction: column;
