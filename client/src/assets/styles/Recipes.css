@@ -116,3 +116,13 @@
     object-fit: contain;
   }
 }
+
+@media (max-width: 600px) {
+  .create-recipe-form {
+    margin-left: 10px;
+  }
+
+  .ingredients-container {
+    margin-left: 0;
+  }
+}
