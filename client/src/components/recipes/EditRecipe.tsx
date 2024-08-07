@@ -129,6 +129,7 @@ export default function EditRecipe() {
                             <Input placeholder="Instruction" />
                           </Form.Item>
                           <MinusCircleOutlined
+                            className="minus-circle"
                             onClick={() => remove(field.name)}
                           />
                         </Space>
@@ -153,7 +154,7 @@ export default function EditRecipe() {
                     alt="Previous recipe"
                     style={{ width: "100px", height: "100px" }}
                   />
-                  <p>Previous recipe photo</p>
+                  <p className="white-text">Previous recipe photo</p>
                 </div>
 
                 <Form.Item

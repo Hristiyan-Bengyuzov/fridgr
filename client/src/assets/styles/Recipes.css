@@ -29,7 +29,7 @@
 }
 
 .ingredient-tag-selected {
-  background-color: #1890ff;
+  background-color: #00b96b;
   color: white;
 }
 
@@ -105,6 +105,23 @@
 
 .no-border {
   border: none !important;
+}
+
+.minus-circle,
+.ant-upload-list-item-action svg {
+  color: red;
+}
+
+.ant-upload-list-item-name {
+  color: white;
+}
+
+.ant-card-meta-title {
+  color: white !important;
+}
+
+.ant-collapse-content-box {
+  background-color: #181a27;
 }
 
 @media (max-width: 1400px) {

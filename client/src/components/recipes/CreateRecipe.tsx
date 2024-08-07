@@ -146,6 +146,7 @@ export default function CreateRecipe() {
                             <Input placeholder="Instruction" />
                           </Form.Item>
                           <MinusCircleOutlined
+                            className="minus-circle"
                             onClick={() => remove(field.name)}
                           />
                         </Space>

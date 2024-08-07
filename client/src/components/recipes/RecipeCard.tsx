@@ -15,9 +15,10 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
 
   return (
     <Card
+      className="dark-bg no-border"
       hoverable
       style={{ width: 240 }}
-      cover={<img alt={recipe.name} src={recipe.image} height={'175px'} />}
+      cover={<img alt={recipe.name} src={recipe.image} height={"175px"} />}
     >
       <Card.Meta title={recipe.name} />
       <Button type="primary" onClick={goToRecipe} style={{ marginTop: 16 }}>

@@ -61,7 +61,7 @@ export default function ProfileTable({
         dataIndex: "image",
         key: "image",
         render: (url: string) => (
-          <img src={url} alt="recipe" style={{ width: 100 }} />
+          <img src={url} alt="recipe" style={{ width: 100, maxHeight: 70 }} />
         ),
       },
       {
@@ -98,7 +98,7 @@ export default function ProfileTable({
         dataIndex: "image",
         key: "image",
         render: (url: string) => (
-          <img src={url} alt="review" style={{ width: 100 }} />
+          <img src={url} alt="review" style={{ width: 100, maxHeight: 70 }} />
         ),
       },
       {
