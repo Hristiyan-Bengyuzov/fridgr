@@ -26,6 +26,7 @@ export default function EditRecipe() {
   const [recipeData, setRecipeData] = useState<EditRecipeDTO | null>(null);
   const navigate = useNavigate();
   const { recipeId } = useParams<{ recipeId: string }>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,9 +73,11 @@ export default function EditRecipe() {
   };
 
   const handleEditSumbit = async (values: CreateRecipeFormValues) => {
+    setLoading(true);
     if (recipeData) {
       await editRecipe(values, recipeData, navigate);
     }
+    setLoading(false);
   };
 
   return (
@@ -177,7 +180,7 @@ export default function EditRecipe() {
                 </Form.Item>
 
                 <Form.Item>
-                  <Button type="primary" htmlType="submit">
+                  <Button type="primary" htmlType="submit" loading={loading}>
                     Submit
                   </Button>
                 </Form.Item>

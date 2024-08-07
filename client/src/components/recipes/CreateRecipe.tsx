@@ -25,6 +25,7 @@ export default function CreateRecipe() {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
+  const [requestLoading, setRequestLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,6 +62,7 @@ export default function CreateRecipe() {
   };
 
   const handleCreateRecipe = async (values: CreateRecipeFormValues) => {
+    setRequestLoading(true);
     const formData = new FormData();
 
     formData.append("name", values.recipeName);
@@ -95,6 +97,8 @@ export default function CreateRecipe() {
       );
     } catch (e) {
       fireSwal("Something went wrong!", "Please try again!", "error", navigate);
+    } finally {
+      setRequestLoading(false);
     }
   };
 
@@ -188,7 +192,11 @@ export default function CreateRecipe() {
                 </Form.Item>
 
                 <Form.Item>
-                  <Button type="primary" htmlType="submit">
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    loading={requestLoading}
+                  >
                     Submit
                   </Button>
                 </Form.Item>
