@@ -22,6 +22,7 @@ export default function Navbar() {
 
   return (
     <div
+      data-testid="navbar"
       className={`navbar navbar-expand-md fixed-top ${
         navColour ? "sticky" : "navbar"
       }`}
