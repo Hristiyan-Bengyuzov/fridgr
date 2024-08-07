@@ -74,7 +74,7 @@ export const deleteReview = async (deleteReviewDTO: DeleteReviewDTO) => {
   });
 
   if (res.isConfirmed) {
-    await axios.delete(
+    const response = await axios.delete(
       `${import.meta.env.VITE_API_URL}/api/Reviews/deleteReview`,
       {
         data: deleteReviewDTO,
@@ -82,5 +82,7 @@ export const deleteReview = async (deleteReviewDTO: DeleteReviewDTO) => {
     );
 
     fireSwal("Review successfully deleted!", "", "success", null);
+
+    return response.data;
   }
 };

@@ -14,6 +14,7 @@ interface DataTableProps {
   userDetails: UserDetailsDTO;
   segment: string;
   recipes: RecipeDTO[];
+  setRecipes: any;
   likedRecipes: RecipeDTO[];
   reviews: UsersReviewsDTO[];
   setReviews: any;
@@ -23,6 +24,7 @@ export default function ProfileTable({
   userDetails,
   segment,
   recipes,
+  setRecipes,
   likedRecipes,
   reviews,
   setReviews,
@@ -30,6 +32,27 @@ export default function ProfileTable({
   const [isModalVisible, setIsModalVisible] = useState(false);
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const handleDeleteRecipe = async (id: number) => {
+    const result = await deleteRecipe(id, null);
+    if (result) {
+      setRecipes((prevRecipes: RecipeDTO[]) =>
+        prevRecipes.filter((recipe) => recipe.id !== id)
+      );
+    }
+  };
+
+  const handleDeleteReview = async (recipeId: number) => {
+    const result = await deleteReview({
+      recipeId,
+      username: authContext?.user?.username as string,
+    });
+    if (result) {
+      setReviews((prevReviews: UsersReviewsDTO[]) =>
+        prevReviews.filter((review) => review.id !== recipeId)
+      );
+    }
+  };
 
   const columns: { [key: string]: ColumnsType<any> } = {
     liked: [
@@ -78,7 +101,7 @@ export default function ProfileTable({
                   Edit
                 </Button>
                 <Button
-                  onClick={async () => await deleteRecipe(record.id, null)}
+                  onClick={async () => handleDeleteRecipe(record.id)}
                   danger
                 >
                   Delete
@@ -124,12 +147,7 @@ export default function ProfileTable({
                   />
                 </Modal>
                 <Button
-                  onClick={async () =>
-                    await deleteReview({
-                      recipeId: record.id,
-                      username: authContext.user?.username as string,
-                    })
-                  }
+                  onClick={async () => handleDeleteReview(record.id)}
                   danger
                 >
                   Delete

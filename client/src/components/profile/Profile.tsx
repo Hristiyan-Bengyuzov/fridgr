@@ -49,6 +49,7 @@ export default function Profile() {
               userDetails={userDetails}
               segment={segment as string}
               recipes={recipes}
+              setRecipes={setRecipes}
               likedRecipes={likedRecipes}
               reviews={reviews}
               setReviews={setReviews}

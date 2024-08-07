@@ -73,7 +73,7 @@ export const deleteRecipe = async (id: number, navigate: any) => {
   });
 
   if (res.isConfirmed) {
-    await axios.delete(
+    const response = await axios.delete(
       `${import.meta.env.VITE_API_URL}/api/Recipes/deleteRecipe/${id}`
     );
 
@@ -84,6 +84,8 @@ export const deleteRecipe = async (id: number, navigate: any) => {
       navigate,
       "/recipes"
     );
+    
+    return response.data;
   }
 };
 
