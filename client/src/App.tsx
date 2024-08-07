@@ -17,6 +17,8 @@ import CreateRecipe from "./components/recipes/CreateRecipe";
 import RecipeDetails from "./components/recipes/RecipeDetails";
 import EditRecipe from "./components/recipes/EditRecipe";
 import Profile from "./components/profile/Profile";
+import UserGuard from "./guards/UserGuard";
+import GuestGuard from "./guards/GuestGuard";
 
 function App() {
   const [load, upadateLoad] = useState(true);
@@ -43,14 +45,17 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" />
             <Route path="/recipes" element={<Recipes />} />
             <Route path="/recipe/:recipeId" element={<RecipeDetails />} />
-            <Route path="/createRecipe" element={<CreateRecipe />} />
-            <Route path="/editRecipe/:recipeId" element={<EditRecipe />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
             <Route path="/profile/:username" element={<Profile />} />
+            <Route element={<UserGuard />}>
+              <Route path="/createRecipe" element={<CreateRecipe />} />
+              <Route path="/editRecipe/:recipeId" element={<EditRecipe />} />
+            </Route>
+            <Route element={<GuestGuard />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Route>
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
           <Footer />
