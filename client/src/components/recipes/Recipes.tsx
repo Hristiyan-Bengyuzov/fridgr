@@ -7,6 +7,7 @@ import "../../assets/styles/Recipes.css";
 import { getRecipesByIngredients } from "../../services/recipes/recipeService";
 import RecipeCard from "./RecipeCard";
 import { RecipeDTO } from "../../types/recipes/recipeDTOs";
+import { useNavigate } from "react-router-dom";
 
 export default function Recipes() {
   const [ingredientsByCategories, setIngredientsByCategories] = useState<
@@ -15,6 +16,7 @@ export default function Recipes() {
   const [selectedIngredients, setSelectedIngredients] = useState<number[]>([]);
   const [recipes, setRecipes] = useState<RecipeDTO[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,9 +69,20 @@ export default function Recipes() {
             </Button>
           </div>
           <div className="recipes-container">
-            {recipes.map((recipe) => (
-              <RecipeCard key={recipe.id} recipe={recipe} />
-            ))}
+            {recipes.length > 0 ? (
+              recipes.map((recipe) => (
+                <RecipeCard key={recipe.id} recipe={recipe} />
+              ))
+            ) : (
+              <div style={{ marginLeft: 70 }}>
+                <p className="white-text">
+                  No recipes with selected ingredients? Create one.
+                </p>
+                <Button onClick={() => navigate("/createRecipe")}>
+                  Create Recipe
+                </Button>
+              </div>
+            )}
           </div>
         </>
       )}

@@ -3,9 +3,11 @@ import LoginFormValues from "../../../types/auth/Login/LoginFormValues";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (values: LoginFormValues) => {
     const response = await axios.post(
@@ -13,7 +15,10 @@ export default function Login() {
       values
     );
 
-    authContext?.login(response.data);
+    if (response) {
+      authContext?.login(response.data);
+      navigate("/");
+    }
   };
 
   return (
