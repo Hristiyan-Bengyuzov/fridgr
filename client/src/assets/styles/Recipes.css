@@ -82,7 +82,8 @@
 }
 
 .recipe-details-img {
-  max-width: 1000px;
+  width: 50vw !important;
+  max-height: 750px;
 }
 
 .ant-card-cover {
